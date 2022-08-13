@@ -1,4 +1,4 @@
-import { h } from "preact";
+import * as React from "react";
 import { AudioInterface } from "./lib/audioInterface";
 import { ProgramDetailsContent } from "./pages/programs/programDetailsContent";
 import { IProgram } from "./types";

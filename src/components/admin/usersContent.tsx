@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { HistoryRecordView } from "../historyRecord";
 import { IHistoryRecord, ISettings } from "../../types";
 import { DateUtils } from "../../utils/date";

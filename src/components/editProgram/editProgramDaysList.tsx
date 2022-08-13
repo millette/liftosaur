@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { IDispatch } from "../../ducks/types";
 import { HeaderView } from "../header";
 import { GroupHeader } from "../groupHeader";
@@ -14,7 +14,7 @@ import { StringUtils } from "../../utils/string";
 import { IconEdit } from "../iconEdit";
 import { ILoading, IState } from "../../models/state";
 import { Button } from "../button";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { ModalPublishProgram } from "../modalPublishProgram";
 import { IconMuscles } from "../iconMuscles";
 import { Thunk } from "../../ducks/thunks";
@@ -77,7 +77,7 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
                 handleTouchStart={handleTouchStart}
                 name={day.name}
                 value={
-                  <Fragment>
+                  <>
                     <button
                       data-cy="edit-day"
                       className="px-2 align-middle ls-days-list-edit-day button"
@@ -131,7 +131,7 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
                         <IconDelete />
                       </button>
                     )}
-                  </Fragment>
+                  </>
                 }
               />
             );
@@ -159,7 +159,7 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
             <MenuItem
               name={exercise.name}
               value={
-                <Fragment>
+                <>
                   <button
                     data-cy="edit-exercise"
                     className="px-2 align-middle ls-days-list-edit-exercise button"
@@ -192,7 +192,7 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
                   >
                     <IconDelete />
                   </button>
-                </Fragment>
+                </>
               }
             />
           );
@@ -204,7 +204,6 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
         <div className="p-3 text-center">
           <SemiButton
             className="ls-export-program"
-            kind="blue"
             onClick={() => props.dispatch(Thunk.exportProgram(props.editProgram))}
           >
             Export program to file

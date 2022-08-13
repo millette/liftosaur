@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Page } from "../../components/page";
 import { MockAudioInterface } from "../../lib/audioInterface";
 import { IProgram } from "../../types";

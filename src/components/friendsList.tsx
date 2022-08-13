@@ -1,5 +1,5 @@
 import { IAllFriends, IFriend } from "../models/state";
-import { Fragment, h, JSX } from "preact";
+import * as React from "react";
 import { MenuItemWrapper } from "./menuItem";
 import { IDispatch } from "../ducks/types";
 import { Thunk } from "../ducks/thunks";
@@ -27,7 +27,7 @@ export function FriendsList(props: IFriendsListProps): JSX.Element {
   }
 
   return (
-    <Fragment>
+    <>
       {ids.map((userId) => {
         const friend = allFriends.friends[userId];
         if (!friend) {
@@ -55,7 +55,7 @@ export function FriendsList(props: IFriendsListProps): JSX.Element {
           </MenuItemWrapper>
         );
       })}
-    </Fragment>
+    </>
   );
 }
 

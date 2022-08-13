@@ -1,13 +1,13 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 
 export function TopNavMenu(): JSX.Element {
   return (
     <nav
-      class="w-full flex items-center mx-auto my-0 px-3 py-6 flex-col md:px-6 md:py-12 sm:flex-row"
+      className="w-full flex items-center mx-auto my-0 px-3 py-6 flex-col md:px-6 md:py-12 sm:flex-row"
       style={{ maxWidth: "800px" }}
     >
-      <div class="flex-1 flex items-center mb-4 sm:mb-0 cursor-pointer">
-        <a href="/" class="text-gray-900 no-underline">
+      <div className="flex-1 flex items-center mb-4 sm:mb-0 cursor-pointer">
+        <a href="/" className="text-gray-900 no-underline">
           <img
             className="inline align-middle"
             style={{ width: "4em", height: "4em" }}

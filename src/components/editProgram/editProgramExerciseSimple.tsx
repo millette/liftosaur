@@ -1,8 +1,8 @@
 import { Program } from "../../models/program";
 import { IDispatch } from "../../ducks/types";
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { ModalExercise } from "../modalExercise";
-import { useState, useRef } from "preact/hooks";
+import { useState, useRef } from "react";
 import { EditProgram } from "../../models/editProgram";
 import { IconEdit } from "../iconEdit";
 import { Exercise, equipmentName } from "../../models/exercise";
@@ -49,12 +49,12 @@ function Edit(props: IProps): JSX.Element {
   const reps = Program.runScript(programExercise, sets[0].repsExpr, 1, settings, "reps");
   const weight = Program.runScript(programExercise, sets[0].weightExpr, 1, settings, "weight");
 
-  const setsRef = useRef<HTMLInputElement>();
-  const repsRef = useRef<HTMLInputElement>();
-  const weightRef = useRef<HTMLInputElement>();
+  const setsRef = useRef<HTMLInputElement>(null);
+  const repsRef = useRef<HTMLInputElement>(null);
+  const weightRef = useRef<HTMLInputElement>(null);
 
   function getSetsNum(): number | undefined {
-    const value = setsRef.current.value;
+    const value = setsRef.current!.value;
     if (value != null) {
       let setsNum = parseInt(value, 10);
       if (isNaN(setsNum)) {
@@ -67,7 +67,7 @@ function Edit(props: IProps): JSX.Element {
   }
 
   function getRepsNum(): number | undefined {
-    const value = repsRef.current.value;
+    const value = repsRef.current!.value;
     if (value != null) {
       let repsNum = parseInt(value, 10);
       if (isNaN(repsNum)) {
@@ -80,7 +80,7 @@ function Edit(props: IProps): JSX.Element {
   }
 
   function getWeightNum(): number | undefined {
-    const value = weightRef.current.value;
+    const value = weightRef.current!.value;
     if (value != null) {
       let weightNum = parseFloat(value);
       if (isNaN(weightNum)) {
@@ -99,7 +99,7 @@ function Edit(props: IProps): JSX.Element {
       <MenuItem
         name="Exercise"
         value={
-          <Fragment>
+          <>
             <button data-cy="select-exercise" className="px-4 align-middle" onClick={() => setShowModalExercise(true)}>
               <IconEdit size={20} lineColor="#0D2B3E" penColor="#A5B3BB" />
             </button>
@@ -107,7 +107,7 @@ function Edit(props: IProps): JSX.Element {
             <div className="text-xs text-blue-700 underline" onClick={() => setShowModalSubstitute(true)}>
               Substitute
             </div>
-          </Fragment>
+          </>
         }
       />
       <MenuItemEditable
@@ -293,12 +293,12 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
     }
   );
 
-  const progressionIncrementRef = useRef<HTMLInputElement>();
-  const progressionUnitRef = useRef<HTMLSelectElement>();
-  const progressionAttemptsRef = useRef<HTMLInputElement>();
-  const deloadDecrementsRef = useRef<HTMLInputElement>();
-  const deloadUnitRef = useRef<HTMLSelectElement>();
-  const deloadFailuresRef = useRef<HTMLInputElement>();
+  const progressionIncrementRef = useRef<HTMLInputElement>(null);
+  const progressionUnitRef = useRef<HTMLSelectElement>(null);
+  const progressionAttemptsRef = useRef<HTMLInputElement>(null);
+  const deloadDecrementsRef = useRef<HTMLInputElement>(null);
+  const deloadUnitRef = useRef<HTMLSelectElement>(null);
+  const deloadFailuresRef = useRef<HTMLInputElement>(null);
 
   return (
     <section>
@@ -323,7 +323,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             type="text"
             value={progression.increment}
             onBlur={() => {
-              let value: number | undefined = parseFloat(progressionIncrementRef.current.value);
+              let value: number | undefined = parseFloat(progressionIncrementRef.current!.value);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(100, value));
               if (value != null) {
                 setProgression({ ...progression, increment: value });
@@ -334,7 +334,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={progressionUnitRef}
             name="units"
             onChange={() => {
-              const unit = progressionUnitRef.current.value as IUnit | "%";
+              const unit = progressionUnitRef.current!.value as IUnit | "%";
               if (unit != null) {
                 setProgression({ ...progression, unit });
               }
@@ -354,7 +354,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             type="number"
             value={progression.attempts}
             onBlur={() => {
-              let value: number | undefined = parseInt(progressionAttemptsRef.current.value, 10);
+              let value: number | undefined = parseInt(progressionAttemptsRef.current!.value, 10);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(20, value));
               if (value != null) {
                 setProgression({ ...progression, attempts: value });
@@ -384,7 +384,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             type="text"
             value={deload.decrement}
             onBlur={() => {
-              let value: number | undefined = parseFloat(deloadDecrementsRef.current.value);
+              let value: number | undefined = parseFloat(deloadDecrementsRef.current!.value);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(100, value));
               if (value != null) {
                 setDeload({ ...deload, decrement: value });
@@ -395,7 +395,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={deloadUnitRef}
             name="units"
             onChange={() => {
-              const unit = deloadUnitRef.current.value as IUnit | "%";
+              const unit = deloadUnitRef.current!.value as IUnit | "%";
               if (unit != null) {
                 setDeload({ ...deload, unit });
               }
@@ -415,7 +415,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             type="number"
             value={deload.attempts}
             onBlur={() => {
-              let value: number | undefined = parseInt(deloadFailuresRef.current.value, 10);
+              let value: number | undefined = parseInt(deloadFailuresRef.current!.value, 10);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(20, value));
               if (value != null) {
                 setDeload({ ...deload, attempts: value });

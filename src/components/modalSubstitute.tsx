@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useRef, useState } from "preact/hooks";
+import * as React from "react";
+import { useRef, useState } from "react";
 import { Modal } from "./modal";
 import { Exercise, IExercise } from "../models/exercise";
 import { StringUtils } from "../utils/string";
@@ -46,7 +46,7 @@ export function ModalSubstitute(props: IModalDateProps): JSX.Element {
             type="text"
             placeholder="Filter"
             onInput={() => {
-              setFilter(textInput.current.value.toLowerCase());
+              setFilter(textInput.current!.value.toLowerCase());
             }}
           />
         </div>

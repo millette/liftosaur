@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
@@ -10,7 +10,7 @@ import { InternalLink } from "../internalLink";
 import { IUser } from "../models/user";
 import { ClipboardUtils } from "../utils/clipboard";
 import { Share } from "../models/share";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { ILengthUnit, ISettings, IUnit } from "../types";
 import { ILoading } from "../models/state";
 import { WhatsNew } from "../models/whatsnew";

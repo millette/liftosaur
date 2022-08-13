@@ -1,13 +1,13 @@
-import { h, JSX, Fragment, ComponentChildren } from "preact";
+import * as React from "react";
 import { IconQuestion } from "./iconQuestion";
 import { IconClose } from "./iconClose";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { IconArrowDown } from "./iconArrowDown";
 
 interface IProps {
   name: string;
   help?: JSX.Element;
-  children?: ComponentChildren;
+  children?: React.ReactNode | undefined;
 }
 
 export function GroupHeader(props: IProps): JSX.Element {
@@ -16,7 +16,7 @@ export function GroupHeader(props: IProps): JSX.Element {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   return (
-    <Fragment>
+    <>
       <div
         onClick={props.children ? () => setIsExpanded(!isExpanded) : undefined}
         className="flex px-6 py-1 text-sm font-bold bg-gray-200 border-b border-gray-300"
@@ -57,6 +57,6 @@ export function GroupHeader(props: IProps): JSX.Element {
         </div>
       )}
       {isExpanded && props.children}
-    </Fragment>
+    </>
   );
 }

@@ -1,7 +1,7 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { IconDelete } from "./iconDelete";
 import { MenuItemWrapper } from "./menuItem";
-import { useState, StateUpdater } from "preact/hooks";
+import { useState } from "react";
 import { StringUtils } from "../utils/string";
 
 type IMenuItemType = "text" | "number" | "select" | "boolean";
@@ -12,7 +12,7 @@ interface IMenuItemEditableValueProps {
   value: string | null;
   valueUnits?: string;
   values?: [string, string][];
-  onChange?: (v?: string, e?: Event) => void;
+  onChange?: (v?: string, e?: React.ChangeEvent) => void;
   pattern?: string;
   patternMessage?: string;
 }
@@ -38,7 +38,7 @@ export function MenuItemEditable(props: IMenuItemEditableProps): JSX.Element {
           >
             {props.isNameHtml ? "" : props.name}
           </span>
-          <Fragment>
+          <>
             <MenuItemValue
               name={props.name}
               type={props.type}
@@ -50,7 +50,7 @@ export function MenuItemEditable(props: IMenuItemEditableProps): JSX.Element {
               onChange={props.onChange}
             />
             {props.value != null && <span className="flex items-center text-gray-700">{props.valueUnits}</span>}
-          </Fragment>
+          </>
           {props.value != null && props.hasClear && (
             <button
               data-cy={`menu-item-delete-${StringUtils.dashcase(props.name)}`}
@@ -74,7 +74,7 @@ export function MenuItemEditable(props: IMenuItemEditableProps): JSX.Element {
 }
 
 function MenuItemValue(
-  props: { setPatternError: StateUpdater<boolean> } & IMenuItemEditableValueProps
+  props: { setPatternError: React.Dispatch<React.SetStateAction<boolean>> } & IMenuItemEditableValueProps
 ): JSX.Element | null {
   if (props.type === "select") {
     return (
@@ -115,7 +115,7 @@ function MenuItemValue(
             type="checkbox"
             className="text-right text-gray-700"
             checked={props.value === "true"}
-            onChange={(e: Event): void => {
+            onChange={(e: React.ChangeEvent): void => {
               if (props.onChange != null) {
                 const value = `${(e.target as HTMLInputElement).checked}`;
                 props.onChange(value, e);
@@ -146,10 +146,10 @@ function MenuItemValue(
 }
 
 function handleChange(
-  cb: ((val: string, e: Event) => void) | undefined,
-  setPatternError: StateUpdater<boolean>
-): (e: Event) => void {
-  return (e: Event): void => {
+  cb: ((val: string, e: React.ChangeEvent) => void) | undefined,
+  setPatternError: React.Dispatch<React.SetStateAction<boolean>>
+): (e: React.ChangeEvent) => void {
+  return (e: React.ChangeEvent): void => {
     setPatternError(e.target instanceof HTMLInputElement && e.target.validity.patternMismatch);
     if (cb != null) {
       const value = (e.target as HTMLInputElement).value;

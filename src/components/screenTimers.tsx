@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";

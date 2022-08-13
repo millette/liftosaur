@@ -1,11 +1,11 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
 import { GraphExercise } from "./graphExercise";
 import { History } from "../models/history";
 import { Thunk } from "../ducks/thunks";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { ModalGraphs } from "./modalGraphs";
 import { ObjectUtils } from "../utils/object";
 import { ISettings, IHistoryRecord, IExerciseId, IEquipment, IStats } from "../types";

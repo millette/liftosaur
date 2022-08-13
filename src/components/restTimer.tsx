@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useEffect, useRef, useState } from "preact/hooks";
+import * as React from "react";
+import { useEffect, useRef, useState } from "react";
 import { TimeUtils } from "../utils/time";
 import { IDispatch } from "../ducks/types";
 import { Thunk } from "../ducks/thunks";

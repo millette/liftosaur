@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { Modal } from "./modal";
 import { Exercise } from "../models/exercise";
 import { StringUtils } from "../utils/string";
@@ -51,7 +51,10 @@ export function ModalGraphs(props: IModalGraphsProps): JSX.Element {
               >
                 <section className="flex items-center">
                   <div className="p-2 cursor-move" style={{ marginLeft: "-16px", touchAction: "none" }}>
-                    <span onMouseDown={handleTouchStart} onTouchStart={handleTouchStart}>
+                    <span
+                      onMouseDown={(e) => handleTouchStart(e.nativeEvent)}
+                      onTouchStart={(e) => handleTouchStart(e.nativeEvent)}
+                    >
                       <IconHandle />
                     </span>
                   </div>
@@ -113,7 +116,7 @@ function ExercisePreview(props: { exercise: IExerciseId; settings: ISettings }):
   const e = Exercise.getById(props.exercise, props.settings.exercises);
   const equipment = Exercise.defaultEquipment(e.id, props.settings.exercises);
   return (
-    <Fragment>
+    <>
       <div className="w-12 pr-4">
         {equipment && (
           <img
@@ -123,14 +126,14 @@ function ExercisePreview(props: { exercise: IExerciseId; settings: ISettings }):
         )}
       </div>
       <div className="flex items-center flex-1 py-2 text-left">{e.name}</div>
-    </Fragment>
+    </>
   );
 }
 
 function StatsPreview(props: { stats: IStatsKey }): JSX.Element {
   return (
-    <Fragment>
+    <>
       <div className="flex items-center flex-1 py-3 text-left">{Stats.name(props.stats)}</div>
-    </Fragment>
+    </>
   );
 }

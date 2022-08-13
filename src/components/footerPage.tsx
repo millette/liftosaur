@@ -1,4 +1,4 @@
-import { JSX, h } from "preact";
+import * as React from "react";
 
 export function FooterPage(): JSX.Element {
   return (

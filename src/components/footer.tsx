@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IconCog } from "./iconCog";
 import { IDispatch } from "../ducks/types";
 import { IconGraphs } from "./iconGraphs";

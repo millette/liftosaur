@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useRef } from "preact/hooks";
+import * as React from "react";
+import { useRef } from "react";
 import { Button } from "./button";
 import { IDispatch } from "../ducks/types";
 import { Modal } from "./modal";

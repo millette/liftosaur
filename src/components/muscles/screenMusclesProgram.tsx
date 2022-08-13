@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../../ducks/types";
 import { Muscle } from "../../models/muscle";
 import { ScreenMuscles } from "./screenMuscles";

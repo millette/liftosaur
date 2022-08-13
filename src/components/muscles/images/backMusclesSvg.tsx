@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IScreenMuscle } from "../../../models/muscle";
 
 declare let __COMMIT_HASH__: string;

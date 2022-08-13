@@ -1,10 +1,10 @@
 import { Program } from "../../models/program";
 import { IDispatch } from "../../ducks/types";
-import { h, JSX } from "preact";
+import * as React from "react";
 import { HeaderView } from "../header";
 import { Thunk } from "../../ducks/thunks";
 import { Tabs } from "../tabs";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { EditProgramExerciseAdvanced } from "./editProgramExerciseAdvanced";
 import { FooterView } from "../footer";
 import { EditProgramExerciseSimple } from "./editProgramExerciseSimple";

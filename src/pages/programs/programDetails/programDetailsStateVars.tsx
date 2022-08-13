@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { memo } from "preact/compat";
+import * as React from "react";
+import { memo } from "react";
 import { inputClassName } from "../../../components/input";
 import { Weight } from "../../../models/weight";
 import { IProgramState, ISettings, IWeight } from "../../../types";
@@ -23,7 +23,7 @@ export const StateVars = memo((props: IStateVarsProps): JSX.Element | null => {
     const val = typeof variable === "number" ? variable : variable.value;
     return (
       <li className="flex items-center pb-2">
-        <label className="pr-2 font-bold" for={name}>
+        <label className="pr-2 font-bold" htmlFor={name}>
           {key}
         </label>
         <input

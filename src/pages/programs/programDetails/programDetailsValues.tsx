@@ -1,5 +1,5 @@
-import { JSX, h, Fragment } from "preact";
-import { memo, useState } from "preact/compat";
+import * as React from "react";
+import { memo, useState } from "react";
 import { Progress } from "../../../models/progress";
 import { Weight } from "../../../models/weight";
 import { IProgramExercise, IProgramSet, ISettings } from "../../../types";
@@ -140,10 +140,10 @@ const GroupedValues = memo(
       return (
         <span>
           {sets > 1 && (
-            <Fragment>
+            <>
               <span>{sets}</span>
               <span> x </span>
-            </Fragment>
+            </>
           )}
           <span>{reps}</span>
         </span>
@@ -153,7 +153,7 @@ const GroupedValues = memo(
       <span>
         {jsxes.map((el, i) => (
           <span>
-            {i !== 0 ? <span> / </span> : <Fragment></Fragment>}
+            {i !== 0 ? <span> / </span> : <></>}
             {el}
           </span>
         ))}

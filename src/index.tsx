@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { h, render } from "preact";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import RB from "rollbar";
 
 declare let Rollbar: RB;
@@ -33,7 +34,10 @@ async function initialize(loadedData: unknown): Promise<void> {
     initialState.adminKey = adminKey;
   }
   (window as any).state = initialState;
-  render(<AppView initialState={initialState} client={client} audio={audio} />, document.getElementById("app")!);
+  ReactDOM.render(
+    <AppView initialState={initialState} client={client} audio={audio} />,
+    document.getElementById("app")!
+  );
 }
 
 IndexedDBUtils.get(getIdbKey(userId, !!adminKey))

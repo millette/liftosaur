@@ -1,11 +1,11 @@
-import { h, JSX, ComponentChildren } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
 import { Thunk } from "../ducks/thunks";
 import { ISettings, IUnit, ILengthUnit, IStats, IWeight, ILength, IStatsWeight, IStatsLength } from "../types";
 import { Button } from "./button";
-import { forwardRef, Ref, useRef, useState, memo } from "preact/compat";
+import { forwardRef, Ref, useRef, useState, memo } from "react";
 import { ObjectUtils } from "../utils/object";
 import { Weight } from "../models/weight";
 import { Length } from "../models/length";
@@ -47,20 +47,20 @@ export function ScreenStats(props: IProps): JSX.Element {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const refs = {
-    weight: useRef<HTMLInputElement>(),
-    neck: useRef<HTMLInputElement>(),
-    shoulders: useRef<HTMLInputElement>(),
-    bicepLeft: useRef<HTMLInputElement>(),
-    bicepRight: useRef<HTMLInputElement>(),
-    forearmLeft: useRef<HTMLInputElement>(),
-    forearmRight: useRef<HTMLInputElement>(),
-    chest: useRef<HTMLInputElement>(),
-    waist: useRef<HTMLInputElement>(),
-    hips: useRef<HTMLInputElement>(),
-    thighLeft: useRef<HTMLInputElement>(),
-    thighRight: useRef<HTMLInputElement>(),
-    calfLeft: useRef<HTMLInputElement>(),
-    calfRight: useRef<HTMLInputElement>(),
+    weight: useRef<HTMLInputElement>(null),
+    neck: useRef<HTMLInputElement>(null),
+    shoulders: useRef<HTMLInputElement>(null),
+    bicepLeft: useRef<HTMLInputElement>(null),
+    bicepRight: useRef<HTMLInputElement>(null),
+    forearmLeft: useRef<HTMLInputElement>(null),
+    forearmRight: useRef<HTMLInputElement>(null),
+    chest: useRef<HTMLInputElement>(null),
+    waist: useRef<HTMLInputElement>(null),
+    hips: useRef<HTMLInputElement>(null),
+    thighLeft: useRef<HTMLInputElement>(null),
+    thighRight: useRef<HTMLInputElement>(null),
+    calfLeft: useRef<HTMLInputElement>(null),
+    calfRight: useRef<HTMLInputElement>(null),
   };
 
   function saveWeight(): void {
@@ -68,7 +68,7 @@ export function ScreenStats(props: IProps): JSX.Element {
       (acc, key) => {
         const isEnabled = statsEnabled.weight[key];
         if (isEnabled) {
-          const stringValue = refs[key]?.current.value;
+          const stringValue = refs[key]?.current?.value;
           if (stringValue) {
             const value = parseFloat(stringValue);
             if (!isNaN(value)) {
@@ -88,7 +88,7 @@ export function ScreenStats(props: IProps): JSX.Element {
       (acc, key) => {
         const isEnabled = statsEnabled.length[key];
         if (isEnabled) {
-          const stringValue = refs[key]?.current.value;
+          const stringValue = refs[key]?.current?.value;
           if (stringValue) {
             const value = parseFloat(stringValue);
             if (!isNaN(value)) {
@@ -272,7 +272,7 @@ interface IInputProps {
 }
 
 interface ISingleLineProps {
-  children: ComponentChildren;
+  children: React.ReactNode | undefined;
 }
 
 function SingleLine(props: ISingleLineProps): JSX.Element {
@@ -284,8 +284,8 @@ function SingleLine(props: ISingleLineProps): JSX.Element {
 }
 
 interface IDoubleLineProps {
-  first: ComponentChildren;
-  second: ComponentChildren;
+  first: React.ReactNode | undefined;
+  second: React.ReactNode | undefined;
 }
 
 function DoubleLine(props: IDoubleLineProps): JSX.Element {

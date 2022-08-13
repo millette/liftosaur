@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { StringUtils } from "../utils/string";
 
 interface IProps<T extends string, U extends string> {

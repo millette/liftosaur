@@ -1,9 +1,9 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../ducks/types";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { ProgramListView } from "./programList";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { Program } from "../models/program";
 import { ModalCreateProgram } from "./modalCreateProgram";
 import { ModalProgramInfo } from "./modalProgramInfo";
@@ -39,7 +39,7 @@ export function ChooseProgramView(props: IProps): JSX.Element {
           ) : undefined
         }
         right={
-          <button className="ls-open-create-new-program-modal p-4" onClick={() => setShouldCreateProgram(true)}>
+          <button className="p-4 ls-open-create-new-program-modal" onClick={() => setShouldCreateProgram(true)}>
             Create
           </button>
         }

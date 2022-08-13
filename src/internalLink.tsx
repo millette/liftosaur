@@ -1,10 +1,10 @@
-import { h, JSX, ComponentChildren } from "preact";
 import { SendMessage } from "./utils/sendMessage";
+import * as React from "react";
 
 interface IProps {
   href: string;
   className?: string;
-  children: ComponentChildren;
+  children: React.ReactNode | undefined;
 }
 
 export function InternalLink(props: IProps): JSX.Element {

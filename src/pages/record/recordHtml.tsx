@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 
 // Overrides to make sure Graphs will render server-side
 global.requestAnimationFrame = global.requestAnimationFrame || undefined;

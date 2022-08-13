@@ -1,5 +1,5 @@
 import RB from "rollbar";
-import { hydrate, JSX } from "preact";
+import * as ReactDOM from "react-dom";
 
 declare let Rollbar: RB;
 declare let __ENV__: string;
@@ -12,6 +12,6 @@ export namespace HydrateUtils {
     const parser = new DOMParser();
     const unescapedRawData = parser.parseFromString(escapedRawData, "text/html").documentElement.textContent || "{}";
     const data = JSON.parse(unescapedRawData) as T;
-    hydrate(cb(data), document.getElementById("app")!);
+    ReactDOM.hydrate(cb(data), document.getElementById("app")!);
   }
 }

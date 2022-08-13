@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { buildCardsReducer, ICardsAction } from "../ducks/reducer";
 import { IDispatch } from "../ducks/types";
 import { Program } from "../models/program";
@@ -9,7 +9,7 @@ import { GroupHeader } from "./groupHeader";
 import { MenuItemEditable } from "./menuItemEditable";
 import { ModalAmrap } from "./modalAmrap";
 import { ModalWeight } from "./modalWeight";
-import { useRef } from "preact/hooks";
+import { useRef } from "react";
 
 export interface IPlaygroundProps {
   progress: IHistoryRecord;
@@ -32,7 +32,7 @@ export function Playground(props: IPlaygroundProps): JSX.Element {
   };
 
   return (
-    <Fragment>
+    <>
       <GroupHeader
         name="Playground"
         help={
@@ -82,6 +82,6 @@ export function Playground(props: IPlaygroundProps): JSX.Element {
         dispatch={dispatch}
         weight={progress.ui?.weightModal?.weight ?? 0}
       />
-    </Fragment>
+    </>
   );
 }

@@ -1,6 +1,6 @@
-import { h, JSX, Fragment } from "preact";
-import { memo } from "preact/compat";
-import { useState, useRef, useCallback } from "preact/hooks";
+import * as React from "react";
+import { memo } from "react";
+import { useState, useRef, useCallback } from "react";
 import { Progress } from "../../../models/progress";
 import { History } from "../../../models/history";
 import { buildCardsReducer } from "../../../ducks/reducer";

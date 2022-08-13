@@ -1,10 +1,10 @@
-import { h, ComponentChildren, JSX, RefObject } from "preact";
+import * as React from "react";
 import { IconClose } from "./iconClose";
-import { useRef, useEffect } from "preact/hooks";
+import { useRef, useEffect } from "react";
 
 interface IProps {
-  children: ComponentChildren;
-  autofocusInputRef?: RefObject<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
+  children: React.ReactNode | undefined;
+  autofocusInputRef?: React.RefObject<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>;
   isHidden?: boolean;
   isFullWidth?: boolean;
   shouldShowClose?: boolean;
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 export function Modal(props: IProps): JSX.Element {
-  const modalRef = useRef<HTMLElement>();
+  const modalRef = useRef<HTMLElement>(null);
 
   let className = "fixed inset-0 flex items-center justify-center";
   if (props.isHidden) {

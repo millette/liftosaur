@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../ducks/types";
 import { History } from "../models/history";
 import { HeaderView } from "./header";
@@ -8,7 +8,7 @@ import { StringUtils } from "../utils/string";
 import { Weight } from "../models/weight";
 import { TimeUtils } from "../utils/time";
 import { Exercise } from "../models/exercise";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { ModalShare } from "./modalShare";
 import { Confetti } from "./confetti";
 import { IHistoryRecord, ISettings } from "../types";

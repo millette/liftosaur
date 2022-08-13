@@ -2,7 +2,7 @@ import { IGThunk } from "../ducks/types";
 import { IEnv } from "../models/state";
 import { useThunkReducer } from "./useThunkReducer";
 import { ILensRecordingPayload } from "lens-shmens";
-import { useCallback } from "preact/hooks";
+import { useCallback } from "react";
 
 type IAction<TState> = {
   type: "Update";

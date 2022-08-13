@@ -1,7 +1,7 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Modal } from "../modal";
 import { Button } from "../button";
-import { useRef } from "preact/hooks";
+import { useRef } from "react";
 
 interface IProps {
   onDone: (newValue?: string, newType?: string) => void;
@@ -9,13 +9,13 @@ interface IProps {
 }
 
 export function ModalAddStateVariable(props: IProps): JSX.Element {
-  const textInput = useRef<HTMLInputElement>();
-  const typeInput = useRef<HTMLSelectElement>();
+  const textInput = useRef<HTMLInputElement>(null);
+  const typeInput = useRef<HTMLSelectElement>(null);
   return (
     <Modal isHidden={props.isHidden} autofocusInputRef={textInput}>
       <h3 className="pb-2 font-bold text-center">Add State Variable</h3>
       <form onSubmit={(e) => e.preventDefault()}>
-        <label for="add_state_variable" className="block text-sm font-bold">
+        <label htmlFor="add_state_variable" className="block text-sm font-bold">
           Variable Name
         </label>
         <input
@@ -25,10 +25,10 @@ export function ModalAddStateVariable(props: IProps): JSX.Element {
           className="block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
           value=""
           type="text"
-          autofocus
+          autoFocus
         />
         <div className="flex my-4">
-          <label for="add_state_variable_type" className="text-sm font-bold">
+          <label htmlFor="add_state_variable_type" className="text-sm font-bold">
             Variable Type:
           </label>
           <select

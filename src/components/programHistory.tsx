@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../ducks/types";
 import { HeaderView } from "./header";
 import { FooterView } from "./footer";
@@ -7,7 +7,7 @@ import { Button } from "./button";
 import { StringUtils } from "../utils/string";
 import { IconMuscles } from "./iconMuscles";
 import { Thunk } from "../ducks/thunks";
-import { useState, useEffect, useRef } from "preact/hooks";
+import { useState, useEffect, useRef } from "react";
 import { IProgram, IHistoryRecord, ISettings, IStats } from "../types";
 import { Tabs } from "./tabs";
 import { StatsList } from "./statsList";
@@ -38,11 +38,11 @@ export function ProgramHistoryView(props: IProps): JSX.Element {
   const nextHistoryRecord = props.progress || Program.nextProgramRecord(props.program, props.settings);
   const [visibleRecords, setVisibleRecords] = useState<number>(20);
   const visibleRecordsRef = useRef<number>(visibleRecords);
-  const containerRef = useRef<HTMLElement>();
+  const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     function scrollHandler(): void {
-      if (window.pageYOffset + window.innerHeight > containerRef.current.clientHeight - 500) {
+      if (window.pageYOffset + window.innerHeight > containerRef.current!.clientHeight - 500) {
         const vr = Math.min(visibleRecordsRef.current + 20, history.length);
         if (visibleRecordsRef.current !== vr) {
           const enddate = sortedHistory[visibleRecordsRef.current - 1]?.date;
@@ -71,7 +71,7 @@ export function ProgramHistoryView(props: IProps): JSX.Element {
         right={
           props.progress == null ? (
             <button
-              className="ls-history-edit-program p-3"
+              className="p-3 ls-history-edit-program"
               onClick={() => Program.editAction(props.dispatch, props.program.id)}
             >
               Edit Program
@@ -120,7 +120,7 @@ export function ProgramHistoryView(props: IProps): JSX.Element {
         loading={props.loading}
         buttons={
           <button
-            className="ls-footer-muscles p-4"
+            className="p-4 ls-footer-muscles"
             data-cy="footer-muscles"
             aria-label="Muscles"
             onClick={() => dispatch(Thunk.pushScreen("musclesProgram"))}

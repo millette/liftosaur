@@ -1,8 +1,8 @@
-import { h, JSX, ComponentChildren } from "preact";
+import * as React from "react";
 
 interface IHeaderCenterProps {
-  title: ComponentChildren;
-  subtitle?: ComponentChildren;
+  title: React.ReactNode | undefined;
+  subtitle?: React.ReactNode | undefined;
 }
 
 interface IHeaderProps extends IHeaderCenterProps {

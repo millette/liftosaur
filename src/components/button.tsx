@@ -1,6 +1,6 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 
-interface IProps extends JSX.HTMLAttributes<HTMLButtonElement> {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonSize?: "xs" | "sm" | "lg";
   kind: "green" | "red" | "blue" | "gray";
 }

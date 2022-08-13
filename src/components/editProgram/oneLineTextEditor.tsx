@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useEffect, useRef } from "preact/hooks";
+import * as React from "react";
+import { useEffect, useRef } from "react";
 import { CodeEditor } from "../../editor";
 import { IEither } from "../../utils/types";
 import { EvalResultInEditor } from "../evalResultInEditor";
@@ -15,7 +15,7 @@ interface IProps {
 }
 
 export function OneLineTextEditor(props: IProps): JSX.Element {
-  const divRef = useRef<HTMLDivElement>();
+  const divRef = useRef<HTMLDivElement>(null);
   const codeEditor = useRef(
     new CodeEditor({
       state: props.state,

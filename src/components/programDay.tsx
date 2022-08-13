@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { CardsView } from "./cards";
 import { HeaderView } from "./header";
 import { FooterView } from "./footer";
@@ -12,7 +12,7 @@ import { ModalDate } from "./modalDate";
 import { IconEdit } from "./iconEdit";
 import { IAllComments, IAllFriends, IAllLikes, IFriendUser, ILoading, IWebpushr } from "../models/state";
 import { ModalShare } from "./modalShare";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { IconShare } from "./iconShare";
 import { IconMuscles } from "./iconMuscles";
 import { Thunk } from "../ducks/thunks";
@@ -122,7 +122,7 @@ export function ProgramDayView(props: IProps): JSX.Element | null {
           loading={props.loading}
           buttons={
             !friend ? (
-              <Fragment>
+              <>
                 <button
                   className="ls-footer-muscles p-4"
                   data-cy="footer-muscles"
@@ -153,7 +153,7 @@ export function ProgramDayView(props: IProps): JSX.Element | null {
                     <IconEdit size={24} lineColor="#A5B3BB" penColor="white" />
                   </button>
                 ) : undefined}
-              </Fragment>
+              </>
             ) : undefined
           }
         />

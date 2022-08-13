@@ -1,7 +1,5 @@
-import { JSX } from "preact";
-
-import { h } from "preact";
-import { useRef, useEffect, useState } from "preact/hooks";
+import * as React from "react";
+import { useRef, useEffect, useState } from "react";
 import { ObjectUtils } from "../utils/object";
 import { Button } from "./button";
 import { Help } from "../models/help";
@@ -28,7 +26,7 @@ interface IProps {
 
 export function HelpOverlay(props: IProps): JSX.Element | null {
   const seenIds: string[] = props.seenIds;
-  const svgEl = useRef<SVGSVGElement>();
+  const svgEl = useRef<SVGSVGElement>(null);
   const width = useRef<number | undefined>();
   const height = useRef<number | undefined>();
 

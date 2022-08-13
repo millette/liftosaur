@@ -1,6 +1,6 @@
 import { IDispatch } from "../ducks/types";
-import { JSX, h } from "preact";
-import { useRef } from "preact/hooks";
+import * as React from "react";
+import { useRef } from "react";
 import { Modal } from "./modal";
 import { Button } from "./button";
 import { Weight } from "../models/weight";
@@ -88,9 +88,9 @@ export function ModalEditSet(props: IModalWeightProps): JSX.Element {
             className="ls-modal-edit-set"
             type="submit"
             onClick={() => {
-              if (repsInput.current.validity.valid && weightInput.current.validity.valid) {
-                const reps = parseInt(repsInput.current.value, 10);
-                const weight = parseFloat(weightInput.current.value);
+              if (repsInput.current!.validity.valid && weightInput.current!.validity.valid) {
+                const reps = parseInt(repsInput.current!.value, 10);
+                const weight = parseFloat(weightInput.current!.value);
                 const isAmrap = !!(isAmrapInput.current?.checked || false);
                 if (!isNaN(reps) && !isNaN(weight)) {
                   const newSet: ISet = { reps, weight: Weight.build(weight, props.units), isAmrap };

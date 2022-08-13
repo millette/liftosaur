@@ -1,4 +1,4 @@
-import { Fragment, h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../ducks/types";
 import { IAllComments, IAllLikes, IFriendUser } from "../models/state";
 import { IHistoryRecord, ISettings } from "../types";
@@ -39,7 +39,7 @@ export function HistoryRecordsList(props: IHistoryRecordsListProps): JSX.Element
     return new Date(Date.parse(b.record.date)).getTime() - new Date(Date.parse(a.record.date)).getTime();
   });
   return (
-    <Fragment>
+    <>
       {combinedHistory.map((historyRecord) =>
         historyRecord.user === "self" ? (
           <HistoryRecordView
@@ -62,6 +62,6 @@ export function HistoryRecordsList(props: IHistoryRecordsListProps): JSX.Element
           />
         )
       )}
-    </Fragment>
+    </>
   );
 }

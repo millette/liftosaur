@@ -1,4 +1,4 @@
-import { useRef, useCallback, Reducer, useState } from "preact/hooks";
+import { useRef, useCallback, Reducer, useState } from "react";
 import { IGDispatch, IGThunk } from "../ducks/types";
 import { IEnv } from "../models/state";
 

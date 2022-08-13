@@ -1,10 +1,10 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
 import { Thunk } from "../ducks/thunks";
 import { IAllFriends, ILoading } from "../models/state";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "react";
 import { GroupHeader } from "./groupHeader";
 import { inputClassName } from "./input";
 import { FriendsList } from "./friendsList";

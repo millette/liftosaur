@@ -1,6 +1,6 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import UPlot from "uplot";
-import { useRef, useEffect } from "preact/hooks";
+import { useRef, useEffect } from "react";
 import { CollectionUtils } from "../utils/collection";
 import { DateUtils } from "../utils/date";
 import { Exercise, equipmentToBarKey } from "../models/exercise";
@@ -81,8 +81,7 @@ export function GraphExercise(props: IGraphProps): JSX.Element {
   const legendRef = useRef<HTMLDivElement>(null);
   const units = props.settings.units;
   useEffect(() => {
-    console.log("RERENDER");
-    const rect = graphRef.current.getBoundingClientRect();
+    const rect = graphRef.current!.getBoundingClientRect();
     const exercise = Exercise.get(props.exercise, props.settings.exercises);
     const data = getData(props.history, props.exercise, props.settings, props.isWithOneRm, props.bodyweightData);
     const opts: UPlot.Options = {
@@ -162,9 +161,9 @@ export function GraphExercise(props: IGraphProps): JSX.Element {
       ],
     };
 
-    const uplot = new UPlot(opts, data, graphRef.current);
+    const uplot = new UPlot(opts, data, graphRef.current!);
 
-    const underEl = graphRef.current.querySelector(".over");
+    const underEl = graphRef.current!.querySelector(".over");
     const underRect = underEl?.getBoundingClientRect();
 
     function handler(): void {

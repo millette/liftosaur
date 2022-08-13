@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useState } from "preact/hooks";
+import * as React from "react";
+import { useState } from "react";
 import { IDispatch } from "../ducks/types";
 import { EditStats } from "../models/editStats";
 import { Length } from "../models/length";

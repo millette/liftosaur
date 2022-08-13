@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { Program } from "../../models/program";
 import { GroupHeader } from "../groupHeader";
 import { IDispatch } from "../../ducks/types";
@@ -10,7 +10,7 @@ import { MultiLineTextEditor } from "./multiLineTextEditor";
 import { Button } from "../button";
 import { OneLineTextEditor } from "./oneLineTextEditor";
 import { EditProgram } from "../../models/editProgram";
-import { useState, useRef, useEffect, useCallback } from "preact/hooks";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { ModalAddStateVariable } from "./modalAddStateVariable";
 import { IEither } from "../../utils/types";
 import { ScriptRunner } from "../../parser";
@@ -133,7 +133,7 @@ export function EditProgramExerciseAdvanced(props: IProps): JSX.Element {
       <MenuItem
         name="Exercise"
         value={
-          <Fragment>
+          <>
             <button data-cy="select-exercise" className="px-4 align-middle" onClick={() => setShowModalExercise(true)}>
               <IconEdit size={20} lineColor="#0D2B3E" penColor="#A5B3BB" />
             </button>
@@ -141,7 +141,7 @@ export function EditProgramExerciseAdvanced(props: IProps): JSX.Element {
             <div className="text-xs text-blue-700 underline" onClick={() => setShowModalSubstitute(true)}>
               Substitute
             </div>
-          </Fragment>
+          </>
         }
       />
       <MenuItemEditable
@@ -269,7 +269,7 @@ function Variations(props: IVariationsProps): JSX.Element {
   const { programExercise, variationIndex, dispatch } = props;
 
   return (
-    <Fragment>
+    <>
       <GroupHeader
         name="Variations"
         help={
@@ -299,7 +299,7 @@ function Variations(props: IVariationsProps): JSX.Element {
           Add Variation +
         </SemiButton>
       </div>
-    </Fragment>
+    </>
   );
 }
 
@@ -317,7 +317,7 @@ function Sets(props: ISetsProps): JSX.Element {
   const variation = programExercise.variations[variationIndex];
   const [resetCounter, setResetCounter] = useState(0);
   return (
-    <Fragment>
+    <>
       <GroupHeader
         name="Sets"
         help={
@@ -369,7 +369,7 @@ function Sets(props: ISetsProps): JSX.Element {
       <div className="px-1 pb-1 text-sm bg-gray-100">
         <SemiButton onClick={() => EditProgram.addSet(dispatch, variationIndex)}>Add Set +</SemiButton>
       </div>
-    </Fragment>
+    </>
   );
 }
 
@@ -428,10 +428,19 @@ function SetFields(props: ISetFieldsProps): JSX.Element {
   const repsResult = validate(set.repsExpr.trim(), "reps");
   const weightResult = validate(set.weightExpr.trim(), "weight");
 
+  const handleTouchStart = useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
+      if (e != null && props.handleTouchStart != null) {
+        props.handleTouchStart(e.nativeEvent);
+      }
+    },
+    [props.handleTouchStart]
+  );
+
   return (
     <li className="relative px-12 py-1 mb-1 bg-white border border-gray-400 rounded-md">
       <div className="absolute" style={{ touchAction: "none", top: 12, left: 12 }}>
-        <span className="p-2 cursor-move" onTouchStart={props.handleTouchStart} onMouseDown={props.handleTouchStart}>
+        <span className="p-2 cursor-move" onTouchStart={handleTouchStart} onMouseDown={handleTouchStart}>
           <IconHandle />
         </span>
       </div>
@@ -446,7 +455,7 @@ function SetFields(props: ISetFieldsProps): JSX.Element {
           </button>
         )}
         <div className="flex-1 pr-4 overflow-x-auto">
-          <label for="variation-0-reps" className="font-bold">
+          <label htmlFor="variation-0-reps" className="font-bold">
             Reps
           </label>
           <OneLineTextEditor
@@ -460,7 +469,7 @@ function SetFields(props: ISetFieldsProps): JSX.Element {
           />
         </div>
         <div>
-          <label className="font-bold" for="variation-0-amrap">
+          <label className="font-bold" htmlFor="variation-0-amrap">
             AMRAP{" "}
             <button onClick={() => alert("As Many Reps As Possible.")}>
               <IconQuestion width={12} height={12} />
@@ -478,7 +487,7 @@ function SetFields(props: ISetFieldsProps): JSX.Element {
         </div>
       </div>
       <div className="mt-2">
-        <label for="variation-0-weight" className="font-bold">
+        <label htmlFor="variation-0-weight" className="font-bold">
           Weight
         </label>
         <OneLineTextEditor
@@ -505,7 +514,7 @@ function VariationsEditor(props: IVariationsEditorProps): JSX.Element {
   const { programExercise } = props;
 
   return (
-    <Fragment>
+    <>
       <GroupHeader
         name="Variation Selection Script"
         help={
@@ -525,7 +534,7 @@ function VariationsEditor(props: IVariationsEditorProps): JSX.Element {
           EditProgram.setExerciseVariationExpr(props.dispatch, value);
         }}
       />
-    </Fragment>
+    </>
   );
 }
 
@@ -596,16 +605,16 @@ function EditWarmupSet(props: IEditWarmupSetProps): JSX.Element {
   const unit = typeof warmupSet.value !== "number" ? warmupSet.value.unit : props.settings.units;
   const threshold = Weight.roundConvertTo(warmupSet.threshold, props.settings, props.exercise.equipment);
 
-  const repsRef = useRef<HTMLInputElement>();
-  const valueRef = useRef<HTMLInputElement>();
-  const valueUnitRef = useRef<HTMLSelectElement>();
-  const thresholdRef = useRef<HTMLInputElement>();
+  const repsRef = useRef<HTMLInputElement>(null);
+  const valueRef = useRef<HTMLInputElement>(null);
+  const valueUnitRef = useRef<HTMLSelectElement>(null);
+  const thresholdRef = useRef<HTMLInputElement>(null);
 
   const onUpdate = useCallback(() => {
-    const newUnit = valueUnitRef.current.value as "%" | "kg" | "lb";
-    const newReps = parseInt(repsRef.current.value, 10);
-    const numValue = parseInt(valueRef.current.value, 10);
-    const thresholdValue = parseFloat(thresholdRef.current.value);
+    const newUnit = valueUnitRef.current!.value as "%" | "kg" | "lb";
+    const newReps = parseInt(repsRef.current!.value, 10);
+    const numValue = parseInt(valueRef.current!.value, 10);
+    const thresholdValue = parseFloat(thresholdRef.current!.value);
     if (!isNaN(numValue) && !isNaN(thresholdValue) && !isNaN(newReps)) {
       const value = newUnit === "%" ? numValue / 100 : Weight.build(numValue, newUnit);
       const newWarmupSet: IProgramExerciseWarmupSet = {
@@ -732,7 +741,7 @@ function FinishDayScriptEditor(props: IFinishDayScriptEditorProps): JSX.Element 
   const { programExercise } = props;
 
   return (
-    <Fragment>
+    <>
       <GroupHeader
         name="Finish Day Script"
         help={
@@ -755,6 +764,6 @@ function FinishDayScriptEditor(props: IFinishDayScriptEditorProps): JSX.Element 
           EditProgram.setExerciseFinishDayExpr(props.dispatch, value);
         }}
       />
-    </Fragment>
+    </>
   );
 }

@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useState } from "preact/hooks";
+import * as React from "react";
+import { useState } from "react";
 import { inputClassName } from "./input";
 
 interface IMultiselectProps {
@@ -17,7 +17,7 @@ export function Multiselect(props: IMultiselectProps): JSX.Element {
   return (
     <div>
       <div>
-        <label for={props.id} className="block text-sm font-bold">
+        <label htmlFor={props.id} className="block text-sm font-bold">
           {props.label}
         </label>
       </div>
@@ -43,7 +43,7 @@ export function Multiselect(props: IMultiselectProps): JSX.Element {
       </datalist>
       <div className="mt-1">
         {Array.from(selectedValues).map((sm) => (
-          <div className=" inline-block px-2 mb-1 mr-1 text-xs bg-gray-300 rounded-full">
+          <div className="inline-block px-2 mb-1 mr-1 text-xs bg-gray-300 rounded-full ">
             <span className="py-1 pl-1">{sm} </span>
             <button
               className="p-1"
@@ -54,7 +54,7 @@ export function Multiselect(props: IMultiselectProps): JSX.Element {
                 setSelectedValues(set);
               }}
             >
-              <span className="inline-block" style="transform: rotate(45deg)">
+              <span className="inline-block" style={{ transform: "rotate(45deg)" }}>
                 +
               </span>
             </button>

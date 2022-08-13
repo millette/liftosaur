@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { ExerciseSetView } from "./exerciseSet";
 import { Exercise } from "../models/exercise";
 import { History, IHistoricalEntries } from "../models/history";
@@ -7,7 +7,7 @@ import { Weight } from "../models/weight";
 import { Reps } from "../models/set";
 import { CollectionUtils } from "../utils/collection";
 import { ProgressStateChanges } from "./progressStateChanges";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { IconQuestion } from "./iconQuestion";
 import { IconClose } from "./iconClose";
 import { ExerciseImage } from "./exerciseImage";
@@ -15,7 +15,7 @@ import { IconEdit } from "./iconEdit";
 import { Button } from "./button";
 import { IconDelete } from "./iconDelete";
 import { EditProgressEntry } from "../models/editProgressEntry";
-import { memo } from "preact/compat";
+import { memo } from "react";
 import { ComparerUtils } from "../utils/comparer";
 import {
   IHistoryEntry,
@@ -67,7 +67,7 @@ export const ExerciseView = memo((props: IProps): JSX.Element => {
     className += " bg-gray-100 border-gray-300";
   }
   return (
-    <Fragment>
+    <>
       <div className={!isImageView ? "h-0 overflow-hidden p-0 m-0" : ""}>
         <ExerciseImageView {...props} onCloseClick={() => setIsImageView(false)} />
       </div>
@@ -84,7 +84,7 @@ export const ExerciseView = memo((props: IProps): JSX.Element => {
           />
         )}
       </section>
-    </Fragment>
+    </>
   );
 }, ComparerUtils.noFns);
 
@@ -131,7 +131,7 @@ const ExerciseContentView = memo(
     const targetMuscles = Exercise.targetMuscles(props.entry.exercise, props.settings.exercises);
     const [isEditMode, setIsEditMode] = useState<boolean>(false);
     return (
-      <Fragment>
+      <>
         <header className="flex">
           <div className="flex-1 mr-auto">
             {exercise.name}
@@ -220,7 +220,7 @@ const ExerciseContentView = memo(
         </header>
         <section className="flex flex-wrap pt-2">
           {(isEditMode || warmupSets?.length > 0) && (
-            <Fragment>
+            <>
               {warmupSets.map((set, i) => {
                 return (
                   <div data-cy="warmup-set">
@@ -286,7 +286,7 @@ const ExerciseContentView = memo(
                 </div>
               )}
               <div style={{ width: "1px" }} className="h-12 my-2 mr-3 bg-gray-400"></div>
-            </Fragment>
+            </>
           )}
           {props.entry.sets.map((set, i) => {
             return (
@@ -337,7 +337,7 @@ const ExerciseContentView = memo(
         </section>
         {historicalSameEntry && <HistoricalSameEntry historicalEntries={historicalSameEntry} />}
         {historicalAmrapSets && <HistoricalAmrapSets historicalAmrapSets={historicalAmrapSets} />}
-      </Fragment>
+      </>
     );
   }
 );
@@ -371,16 +371,16 @@ function HistoricalSameEntry(props: { historicalEntries: IHistoricalEntries }): 
 
 function HistoricalReps(props: { sets: ISet[] }): JSX.Element {
   return (
-    <Fragment>
+    <>
       {props.sets.map((set, i) => (
-        <Fragment>
+        <>
           {i !== 0 && <span className="text-gray-600">/</span>}
           <span className={(set.completedReps || 0) >= set.reps ? `text-green-600` : `text-red-600`}>
             {set.completedReps || 0}
           </span>
-        </Fragment>
+        </>
       ))}
-    </Fragment>
+    </>
   );
 }
 

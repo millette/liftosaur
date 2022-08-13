@@ -1,10 +1,10 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { ExerciseView } from "./exercise";
 import { IDispatch } from "../ducks/types";
 import { Progress } from "../models/progress";
 import { Button } from "./button";
 import { Timer } from "./timer";
-import { memo } from "preact/compat";
+import { memo } from "react";
 import { IHistoryRecord, IProgram, ISettings, IProgressMode, IProgramExercise } from "../types";
 import { IAllComments, IAllFriends, IAllLikes, IFriendUser } from "../models/state";
 import { Comments } from "./comments";

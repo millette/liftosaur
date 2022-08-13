@@ -1,6 +1,6 @@
-import { JSX, h, ComponentChildren, Fragment } from "preact";
+import * as React from "react";
 import { Exercise } from "../models/exercise";
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "react";
 import { IconSpinner } from "./iconSpinner";
 import { IAllCustomExercises, IExerciseType } from "../types";
 
@@ -12,7 +12,7 @@ interface IProps {
 
 export function ExerciseImage({ exerciseType, customExercises, size }: IProps): JSX.Element | null {
   const targetMuscles = Exercise.targetMuscles(exerciseType, customExercises);
-  const imgRef = useRef<HTMLImageElement>();
+  const imgRef = useRef<HTMLImageElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   useEffect(() => {
@@ -40,10 +40,10 @@ export function ExerciseImage({ exerciseType, customExercises, size }: IProps): 
       ? `https://www.liftosaur.com/externalimages/exercises/full/large/${id}_${equipment}_full_large.png`
       : `https://www.liftosaur.com/externalimages/exercises/single/small/${id}_${equipment}_single_small.png`;
   return targetMuscles.length > 0 ? (
-    <Fragment>
+    <>
       <img ref={imgRef} className={className} src={src} />
       <ExerciseImageAuxiliary isError={isError} isLoading={isLoading} />
-    </Fragment>
+    </>
   ) : (
     <ExerciseNoImage>No exercise image</ExerciseNoImage>
   );
@@ -53,7 +53,7 @@ function ExerciseImageAuxiliary(props: { isError: boolean; isLoading: boolean })
   if (props.isError) {
     return (
       <ExerciseNoImage>
-        <span class="text-red-700">Error fetching the exercise image</span>
+        <span className="text-red-700">Error fetching the exercise image</span>
       </ExerciseNoImage>
     );
   } else if (props.isLoading) {
@@ -70,7 +70,7 @@ function ExerciseImageAuxiliary(props: { isError: boolean; isLoading: boolean })
 }
 
 interface INoImageProps {
-  children: ComponentChildren;
+  children: React.ReactNode | undefined;
 }
 
 function ExerciseNoImage(props: INoImageProps): JSX.Element {

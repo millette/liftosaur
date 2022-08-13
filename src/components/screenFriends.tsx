@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
@@ -6,7 +6,7 @@ import { Thunk } from "../ducks/thunks";
 import { Button } from "./button";
 import { IAllFriends, ILoading } from "../models/state";
 import { FriendsList } from "./friendsList";
-import { useEffect } from "preact/hooks";
+import { useEffect } from "react";
 import { GroupHeader } from "./groupHeader";
 
 interface IProps {

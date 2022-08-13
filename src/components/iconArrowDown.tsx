@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 
 interface IProps {
   style?: { [key: string]: string | number };

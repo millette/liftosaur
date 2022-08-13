@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Thunk } from "../ducks/thunks";
 import { IDispatch } from "../ducks/types";
 import { IAllLikes } from "../models/state";

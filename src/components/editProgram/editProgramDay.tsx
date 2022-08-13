@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { IDispatch } from "../../ducks/types";
 import { HeaderView } from "../header";
 import { FooterView } from "../footer";
@@ -66,7 +66,7 @@ export function EditProgramDay(props: IProps): JSX.Element {
                     handleTouchStart={handleTouchStart}
                     name={exercise.name}
                     value={
-                      <Fragment>
+                      <>
                         <button
                           className="ls-day-edit-exercise button p-2 align-middle"
                           onClick={() => EditProgram.editProgramExercise(props.dispatch, exercise)}
@@ -81,7 +81,7 @@ export function EditProgramDay(props: IProps): JSX.Element {
                         >
                           <IconDelete />
                         </button>
-                      </Fragment>
+                      </>
                     }
                   />
                 );
@@ -90,7 +90,7 @@ export function EditProgramDay(props: IProps): JSX.Element {
                 EditProgram.reorderExercises(props.dispatch, program, dayIndex, startIndex, endIndex);
               }}
             />
-            <div class="p-1">
+            <div className="p-1">
               <SemiButton
                 className="ls-day-add-exercise"
                 onClick={() => {

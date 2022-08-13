@@ -1,5 +1,5 @@
 import { lb } from "lens-shmens";
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IProgram, ISettings } from "../../../types";
 import { ProgramDetailsExercise } from "./programDetailsExercise";
 import { IProgramDetailsDispatch, IProgramDetailsState } from "./types";

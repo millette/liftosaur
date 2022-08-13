@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { FooterView } from "./footer";
 import { HeaderView } from "./header";
 import { IDispatch } from "../ducks/types";
@@ -41,7 +41,7 @@ function ScreenAccountLoggedOut(props: { dispatch: IDispatch }): JSX.Element {
 
 function ScreenAccountLoggedIn(props: { email: string; dispatch: IDispatch }): JSX.Element {
   return (
-    <Fragment>
+    <>
       <section className="w-full px-6 py-4 text-center border-b border-gray-200" data-cy="menu-item-current-account">
         Current account: <span className="text-gray-500">{props.email}</span>
       </section>
@@ -54,6 +54,6 @@ function ScreenAccountLoggedIn(props: { email: string; dispatch: IDispatch }): J
           <span className="flex-1">Log Out</span>
         </button>
       </section>
-    </Fragment>
+    </>
   );
 }

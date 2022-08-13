@@ -1,8 +1,8 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { Exercise } from "../../../models/exercise";
 import { Weight } from "../../../models/weight";
 import { MenuItemEditable } from "../../menuItemEditable";
-import { useState, useRef } from "preact/hooks";
+import { useState, useRef } from "react";
 import { Button } from "../../button";
 import { IDispatch } from "../../../ducks/types";
 import { EditProgram } from "../../../models/editProgram";
@@ -73,7 +73,7 @@ function TrainingMaxExercise(props: IPropsExercise): JSX.Element {
   const [shouldShowCalculator, setShouldShowCalculator] = useState<boolean>(false);
 
   return (
-    <Fragment>
+    <>
       <MenuItemEditable
         type="number"
         name={props.name}
@@ -104,7 +104,7 @@ function TrainingMaxExercise(props: IPropsExercise): JSX.Element {
           ) : undefined
         }
       />
-    </Fragment>
+    </>
   );
 }
 
@@ -119,13 +119,13 @@ export function TrainingMaxCalculator(props: IPropsCalculator): JSX.Element {
   const [result, setResult] = useState<IWeight | undefined>(undefined);
 
   function calculate(): void {
-    const reps = parseInt(repsInput.current.value, 10);
-    const weight = parseInt(weightInput.current.value, 10);
+    const reps = parseInt(repsInput.current!.value, 10);
+    const weight = parseInt(weightInput.current!.value, 10);
     setResult(Weight.getTrainingMax(Weight.build(weight, props.settings.units), reps, props.settings, "barbell"));
   }
 
   return (
-    <Fragment>
+    <>
       <h3 className="pb-2 text-sm font-bold">Enter weight and number of reps</h3>
       <form onSubmit={(e) => e.preventDefault()} className="pb-2">
         <div className="mb-2">
@@ -181,6 +181,6 @@ export function TrainingMaxCalculator(props: IPropsCalculator): JSX.Element {
           </div>
         </div>
       </form>
-    </Fragment>
+    </>
   );
 }

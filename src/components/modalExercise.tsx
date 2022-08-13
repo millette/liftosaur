@@ -1,11 +1,11 @@
-import { h, JSX } from "preact";
-import { Ref, useRef, useState } from "preact/hooks";
+import * as React from "react";
+import { useRef, useState } from "react";
 import { Modal } from "./modal";
 import { StringUtils } from "../utils/string";
 import { availableMuscles, ICustomExercise, IEquipment, IExerciseId, IMuscle, ISettings } from "../types";
 import { GroupHeader } from "./groupHeader";
 import { SemiButton } from "./semiButton";
-import { forwardRef } from "preact/compat";
+import { forwardRef } from "react";
 import { Button } from "./button";
 import { IDispatch } from "../ducks/types";
 import { EditCustomExercise } from "../models/editCustomExercise";
@@ -69,7 +69,7 @@ interface IExercisesListProps {
   setEditingExercise: (exercise?: ICustomExercise) => void;
   setIsCustomExerciseDisplayed: (value: boolean) => void;
   onChange: (value?: IExerciseId) => void;
-  textInput: Ref<HTMLInputElement>;
+  textInput: React.RefObject<HTMLInputElement>;
   dispatch: IDispatch;
 }
 
@@ -87,11 +87,11 @@ const ExercisesList = forwardRef(
       <form data-cy="modal-exercise" onSubmit={(e) => e.preventDefault()}>
         <input
           ref={textInput}
-          className="focus:outline-none focus:shadow-outline block w-full px-4 py-2 mb-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none"
+          className="block w-full px-4 py-2 mb-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
           type="text"
           placeholder="Filter"
           onInput={() => {
-            setFilter(textInput.current.value.toLowerCase());
+            setFilter(textInput.current!.value.toLowerCase());
           }}
         />
         <GroupHeader name="Custom exercises" />
@@ -111,7 +111,7 @@ const ExercisesList = forwardRef(
               >
                 <section className="flex items-center">
                   <button
-                    className="button px-3 py-4"
+                    className="px-3 py-4 button"
                     data-cy={`custom-exercise-edit-${StringUtils.dashcase(e.name)}`}
                     onClick={(event) => {
                       event.preventDefault();
@@ -123,7 +123,7 @@ const ExercisesList = forwardRef(
                   </button>
                   <div className="flex items-center flex-1 py-2 text-left">{e.name}</div>
                   <button
-                    className="button px-1 py-4"
+                    className="px-1 py-4 button"
                     data-cy={`custom-exercise-delete-${StringUtils.dashcase(e.name)}`}
                     onClick={(event) => {
                       event.preventDefault();
@@ -239,8 +239,8 @@ function CustomExerciseForm(props: IEditCustomExerciseProps): JSX.Element {
         initialSelectedValues={new Set(props.exercise?.meta.synergistMuscles || [])}
         onChange={(muscles) => setSynergistMuscles(Array.from(muscles) as IMuscle[])}
       />
-      <div class="py-4 flex">
-        <div class="flex-1">
+      <div className="flex py-4">
+        <div className="flex-1">
           <Button
             kind="gray"
             data-cy="custom-exercise-cancel"
@@ -252,7 +252,7 @@ function CustomExerciseForm(props: IEditCustomExerciseProps): JSX.Element {
             Back to list
           </Button>
         </div>
-        <div class="flex-1 text-right">
+        <div className="flex-1 text-right">
           <Button
             kind="green"
             data-cy="custom-exercise-create"

@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useCallback, useRef } from "preact/hooks";
+import * as React from "react";
+import { useCallback, useRef } from "react";
 import { Thunk } from "../ducks/thunks";
 import { IDispatch } from "../ducks/types";
 import { IAllComments, IAllFriends, IAllLikes } from "../models/state";
@@ -25,10 +25,10 @@ export function Comments(props: ICommentsProps): JSX.Element {
   const { friendId, dispatch, currentUserId } = props;
   const historyRecordId = `${props.historyRecordId}`;
   const comments = props.comments.comments[historyRecordId] || [];
-  const textAreaRef = useRef<HTMLTextAreaElement>();
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSend = useCallback(() => {
-    const text = textAreaRef.current.value;
+    const text = textAreaRef.current!.value;
     dispatch(Thunk.postComment(historyRecordId, friendId || currentUserId, text));
   }, [historyRecordId, friendId]);
 
@@ -80,7 +80,7 @@ export function Comments(props: ICommentsProps): JSX.Element {
           );
         })}
       </ul>
-      <label className="text-xs font-bold" for="new-comment">
+      <label className="text-xs font-bold" htmlFor="new-comment">
         New Comment:
       </label>
       <div className="flex items-start">

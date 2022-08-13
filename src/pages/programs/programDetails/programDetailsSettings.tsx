@@ -1,6 +1,6 @@
 import { lb } from "lens-shmens";
-import { h, JSX } from "preact";
-import { useState } from "preact/hooks";
+import * as React from "react";
+import { useState } from "react";
 import { EquipmentSettings } from "../../../components/equipmentSettings";
 import { GroupHeader } from "../../../components/groupHeader";
 import { MenuItemEditable } from "../../../components/menuItemEditable";

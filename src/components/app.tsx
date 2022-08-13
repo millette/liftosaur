@@ -1,5 +1,5 @@
-import { h, JSX, Fragment } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import * as React from "react";
+import { useEffect, useState } from "react";
 import { reducerWrapper } from "../ducks/reducer";
 import { ProgramDayView } from "./programDay";
 import { ChooseProgramView } from "./chooseProgram";
@@ -112,7 +112,7 @@ export function AppView(props: IProps): JSX.Element | null {
     (Screen.current(state.screenStack) === "main" && currentProgram == null)
   ) {
     content = (
-      <Fragment>
+      <>
         <ChooseProgramView
           loading={state.loading}
           settings={state.storage.settings}
@@ -123,7 +123,7 @@ export function AppView(props: IProps): JSX.Element | null {
           editProgramId={state.progress[0]?.programId}
         />
         {shouldShowOnboarding && <ModalOnboarding dispatch={dispatch} onClose={() => setShouldShowOnboarding(false)} />}
-      </Fragment>
+      </>
     );
   } else if (Screen.current(state.screenStack) === "main") {
     if (currentProgram != null) {
@@ -285,13 +285,13 @@ export function AppView(props: IProps): JSX.Element | null {
   }
 
   return (
-    <Fragment>
+    <>
       {content}
       <Notification dispatch={dispatch} notification={state.notification} />
       <HelpOverlay dispatch={dispatch} seenIds={state.storage.helps} />
       {shouldShowWhatsNew && state.storage.whatsNew != null && (
         <ModalWhatsnew lastDateStr={state.storage.whatsNew} onClose={() => WhatsNew.updateStorage(dispatch)} />
       )}
-    </Fragment>
+    </>
   );
 }

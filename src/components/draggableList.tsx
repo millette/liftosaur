@@ -1,5 +1,5 @@
-import { JSX, h, Fragment } from "preact";
-import { useRef, useState, useEffect } from "preact/hooks";
+import * as React from "react";
+import { useRef, useState, useEffect } from "react";
 
 interface IData {
   pointY: number;
@@ -15,7 +15,7 @@ interface IDraggableListProps<T> {
 export function DraggableList<T>(props: IDraggableListProps<T>): JSX.Element {
   const [data, setData] = useState<IData | undefined>(undefined);
   const theData = useRef<IData | undefined>(undefined);
-  const elWrapper = useRef<HTMLDivElement>();
+  const elWrapper = useRef<HTMLDivElement>(null);
   const offsetY = useRef<number | undefined>(undefined);
   const heights = useRef<(number | undefined)[]>([]);
 
@@ -26,7 +26,7 @@ export function DraggableList<T>(props: IDraggableListProps<T>): JSX.Element {
   return (
     <div ref={elWrapper}>
       {props.items.map((e, i) => (
-        <Fragment>
+        <>
           <DropTarget index={i} heights={heights.current} data={theData.current} />
           <DraggableListItem
             isDragging={!!theData.current}
@@ -68,7 +68,7 @@ export function DraggableList<T>(props: IDraggableListProps<T>): JSX.Element {
             }}
           />
           {props.items.length - 1 === i && <DropTarget heights={heights.current} index={i + 1} data={data} />}
-        </Fragment>
+        </>
       ))}
     </div>
   );
@@ -83,7 +83,7 @@ function DropTarget({
   index: number;
   heights: (number | undefined)[];
 }): JSX.Element {
-  const el = useRef<HTMLDivElement>();
+  const el = useRef<HTMLDivElement>(null);
   const rect = useRef<{ y: number; x: number; width: number; height: number } | undefined>(undefined);
 
   const prevIsDragging = useRef(false);
@@ -183,7 +183,7 @@ function DraggableListItem<T>(props: IDraggableListItemProps<T>): JSX.Element {
     }, 0);
   }
 
-  const el = useRef<HTMLDivElement>();
+  const el = useRef<HTMLDivElement>(null);
   const [y, setY] = useState<number | undefined>(undefined);
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [, setHeight] = useState<number | undefined>(undefined);

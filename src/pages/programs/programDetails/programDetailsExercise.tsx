@@ -1,6 +1,6 @@
-import { h, JSX } from "preact";
-import { memo } from "preact/compat";
-import { useState } from "preact/hooks";
+import * as React from "react";
+import { memo } from "react";
+import { useState } from "react";
 import { ExerciseImage } from "../../../components/exerciseImage";
 import { Program } from "../../../models/program";
 import { Progression } from "../../../models/progression";

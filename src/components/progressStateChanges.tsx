@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Program } from "../models/program";
 import { ObjectUtils } from "../utils/object";
 import { Weight } from "../models/weight";

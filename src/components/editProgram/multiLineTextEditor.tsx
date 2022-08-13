@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { useEffect, useRef } from "preact/hooks";
+import * as React from "react";
+import { useEffect, useRef } from "react";
 import { CodeEditor } from "../../editor";
 import { IEither } from "../../utils/types";
 import { EvalResultInEditor } from "../evalResultInEditor";
@@ -35,10 +35,10 @@ export function MultiLineTextEditor(props: IProps): JSX.Element {
     codeEditor.current.updateState(props.state);
   });
 
-  const divRef = useRef<HTMLDivElement>();
+  const divRef = useRef<HTMLDivElement>(null);
 
   let className =
-    "focus:outline-none focus:shadow-outline relative z-10 block w-full px-2 py-2 leading-normal bg-white border rounded-lg appearance-none";
+    "relative z-10 block w-full px-2 py-2 leading-normal bg-white border rounded-lg appearance-none focus:outline-none focus:shadow-outline";
   if (props.result != null && !props.result.success) {
     className += " border-red-500";
   } else {

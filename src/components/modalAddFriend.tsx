@@ -1,5 +1,5 @@
-import { JSX, h } from "preact";
-import { useRef } from "preact/hooks";
+import * as React from "react";
+import { useRef } from "react";
 import { Modal } from "./modal";
 import { Button } from "./button";
 import { inputClassName } from "./input";
@@ -39,7 +39,7 @@ export function ModalAddFriend(props: IModalAddFriendProps): JSX.Element {
             className="ls-modal-set-weight"
             type="submit"
             onClick={() => {
-              const value = textArea.current?.value;
+              const value = textArea.current!.value;
               props.onAdd(value);
             }}
           >

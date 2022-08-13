@@ -1,4 +1,4 @@
-import { h, JSX, ComponentChildren } from "preact";
+import * as React from "react";
 import { IconArrowRight } from "./iconArrowRight";
 import { IconHandle } from "./iconHandle";
 import { StringUtils } from "../utils/string";
@@ -8,13 +8,13 @@ interface IMenuItemProps {
   value?: string | JSX.Element;
   shouldShowRightArrow?: boolean;
   handleTouchStart?: (e: TouchEvent | MouseEvent) => void;
-  onClick?: (e: MouseEvent) => void;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export function MenuItemWrapper(props: {
   name: string;
-  children: ComponentChildren;
-  onClick?: (e: MouseEvent) => void;
+  children: React.ReactNode | undefined;
+  onClick?: (e: React.MouseEvent) => void;
 }): JSX.Element {
   return (
     <section
@@ -28,12 +28,21 @@ export function MenuItemWrapper(props: {
 }
 
 export function MenuItem(props: IMenuItemProps): JSX.Element {
+  const handleTouchStart = React.useCallback(
+    (e: React.MouseEvent | React.TouchEvent) => {
+      if (e != null && props.handleTouchStart != null) {
+        props.handleTouchStart(e.nativeEvent);
+      }
+    },
+    [props.handleTouchStart]
+  );
+
   return (
     <MenuItemWrapper name={props.name} onClick={props.onClick}>
       <section className="flex items-center">
         {props.handleTouchStart && (
           <div className="p-2 cursor-move" style={{ marginLeft: "-16px", touchAction: "none" }}>
-            <span onMouseDown={props.handleTouchStart} onTouchStart={props.handleTouchStart}>
+            <span onMouseDown={handleTouchStart} onTouchStart={handleTouchStart}>
               <IconHandle />
             </span>
           </div>

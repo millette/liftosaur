@@ -1,4 +1,4 @@
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { Program } from "../models/program";
 import { GroupHeader } from "./groupHeader";
 import { MenuItem } from "./menuItem";
@@ -40,7 +40,7 @@ export function ProgramListView(props: IProps): JSX.Element {
         If you're new to weight lifting, consider starting with <strong>Basic Beginner Routine</strong>.
       </p>
       {customPrograms.length > 0 && (
-        <Fragment>
+        <>
           <GroupHeader name="Your Programs" />
           {customPrograms.map((program) => (
             <MenuItem
@@ -51,7 +51,7 @@ export function ProgramListView(props: IProps): JSX.Element {
                 }
               }}
               value={
-                <Fragment>
+                <>
                   <button
                     className="button p-2 align-middle"
                     onClick={() => {
@@ -86,15 +86,15 @@ export function ProgramListView(props: IProps): JSX.Element {
                   >
                     <IconDelete />
                   </button>
-                </Fragment>
+                </>
               }
             />
           ))}
-        </Fragment>
+        </>
       )}
 
       {programs.length > 0 && (
-        <Fragment>
+        <>
           <GroupHeader name="Programs to clone from" />
           {programs.map((program) => (
             <button
@@ -116,7 +116,7 @@ export function ProgramListView(props: IProps): JSX.Element {
               </div>
             </button>
           ))}
-        </Fragment>
+        </>
       )}
     </section>
   );

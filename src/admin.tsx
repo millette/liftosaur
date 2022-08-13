@@ -1,4 +1,5 @@
-import { h, hydrate } from "preact";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import { UsersContent } from "./components/admin/usersContent";
 import { LogsContent } from "./components/admin/logsContent";
 
@@ -9,9 +10,9 @@ function main(): void {
   const data = JSON.parse(unescapedRawData);
   const url = document.location.pathname;
   if (url.indexOf("users") !== -1) {
-    hydrate(<UsersContent {...data} />, document.getElementById("app")!);
+    ReactDOM.hydrate(<UsersContent {...data} />, document.getElementById("app")!);
   } else if (url.indexOf("logs") !== -1) {
-    hydrate(<LogsContent {...data} />, document.getElementById("app")!);
+    ReactDOM.hydrate(<LogsContent {...data} />, document.getElementById("app")!);
   }
 }
 

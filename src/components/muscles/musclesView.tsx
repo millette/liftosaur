@@ -1,5 +1,5 @@
-import { h, JSX, Fragment } from "preact";
-import { useState } from "preact/hooks";
+import * as React from "react";
+import { useState } from "react";
 import { Exercise } from "../../models/exercise";
 import { IPoints, IScreenMuscle, Muscle } from "../../models/muscle";
 import { ISettings } from "../../types";

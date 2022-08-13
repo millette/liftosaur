@@ -1,5 +1,5 @@
-import { h, JSX } from "preact";
-import { memo } from "preact/compat";
+import * as React from "react";
+import { memo } from "react";
 import { Reps } from "../models/set";
 import { Weight } from "../models/weight";
 import { ComparerUtils } from "../utils/comparer";
@@ -12,7 +12,7 @@ interface IProps {
   settings: ISettings;
   set: ISet;
   isEditMode: boolean;
-  onClick: (e: Event) => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 interface IAmrapExerciseSetProps {
@@ -22,7 +22,7 @@ interface IAmrapExerciseSetProps {
   settings: ISettings;
   set: ISet;
   isEditMode: boolean;
-  onClick: (e: Event) => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 interface IStartedExerciseSetProps {
@@ -32,7 +32,7 @@ interface IStartedExerciseSetProps {
   isCurrent: boolean;
   set: ISet;
   isEditMode: boolean;
-  onClick: (e: Event) => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 interface INotStartedExerciseSetProps {
@@ -42,7 +42,7 @@ interface INotStartedExerciseSetProps {
   settings: ISettings;
   set: ISet;
   isEditMode: boolean;
-  onClick: (e: Event) => void;
+  onClick: (e: React.MouseEvent) => void;
 }
 
 export const ExerciseSetView = memo((props: IProps): JSX.Element => {

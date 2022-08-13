@@ -1,7 +1,7 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Button } from "./button";
 import { Modal } from "./modal";
-import { useRef } from "preact/hooks";
+import { useRef } from "react";
 
 interface IProps {
   onSelect: (name: string) => void;
@@ -17,7 +17,7 @@ export function ModalCreateProgram(props: IProps): JSX.Element {
       <input
         data-cy="modal-create-program-input"
         ref={textInput}
-        className="focus:outline-none focus:shadow-outline block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none"
+        className="block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
         type="text"
         placeholder="Program Name"
       />
@@ -35,8 +35,8 @@ export function ModalCreateProgram(props: IProps): JSX.Element {
           data-cy="modal-create-program-submit"
           type="button"
           kind="green"
-          className="ls-modal-create-program mr-3"
-          onClick={() => props.onSelect(textInput.current.value)}
+          className="mr-3 ls-modal-create-program"
+          onClick={() => props.onSelect(textInput.current!.value)}
         >
           Select
         </Button>

@@ -1,4 +1,4 @@
-import { JSX, h, ComponentChildren } from "preact";
+import * as React from "react";
 import { TopNavMenu } from "./topNavMenu";
 import { FooterPage } from "./footerPage";
 
@@ -11,7 +11,7 @@ interface IProps<T> {
   ogUrl?: string;
   ogImage?: string;
   data: T;
-  children?: ComponentChildren;
+  children?: React.ReactNode | undefined;
   postHead?: JSX.Element;
 }
 
@@ -48,7 +48,7 @@ export function Page<T>(props: IProps<T>): JSX.Element {
         {props.postHead}
       </head>
       <body>
-        <div class="content">
+        <div className="content">
           <TopNavMenu />
           <div id="app" style={{ maxWidth: 800, margin: "0 auto", width: "100%" }}>
             {props.children}

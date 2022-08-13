@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { Modal } from "./modal";
 import { IDispatch } from "../ducks/types";
 import { MenuItemEditable } from "./menuItemEditable";

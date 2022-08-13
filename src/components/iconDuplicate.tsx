@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 
 export function IconDuplicate(): JSX.Element {
   return (

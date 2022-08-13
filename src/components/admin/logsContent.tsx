@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { DateUtils } from "../../utils/date";
 import { CollectionUtils } from "../../utils/collection";
 import { ILogPayloads } from "./logsHtml";

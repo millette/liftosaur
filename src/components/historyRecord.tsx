@@ -1,4 +1,4 @@
-import { h, JSX } from "preact";
+import * as React from "react";
 import { IDispatch } from "../ducks/types";
 import { CollectionUtils } from "../utils/collection";
 import { Reps } from "../models/set";
@@ -8,7 +8,7 @@ import { TimeUtils } from "../utils/time";
 import { Progress } from "../models/progress";
 import { Weight } from "../models/weight";
 import { ComparerUtils } from "../utils/comparer";
-import { memo } from "preact/compat";
+import { memo } from "react";
 import { IHistoryRecord, ISettings, ISet } from "../types";
 import { IconComments } from "./iconComments";
 import { IAllComments, IAllLikes } from "../models/state";

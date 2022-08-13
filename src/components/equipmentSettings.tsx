@@ -1,5 +1,5 @@
 import { lb, Lens } from "lens-shmens";
-import { h, JSX, Fragment } from "preact";
+import * as React from "react";
 import { Weight } from "../models/weight";
 import { ISettings, IEquipmentData, IEquipment } from "../types";
 import { GroupHeader } from "./groupHeader";
@@ -12,7 +12,7 @@ import { CollectionUtils } from "../utils/collection";
 import { ObjectUtils } from "../utils/object";
 import { ModalPlates } from "./modalPlates";
 import { ModalNewFixedWeight } from "./modalNewFixedWeight";
-import { useState } from "preact/hooks";
+import { useState } from "react";
 import { ILensDispatchSimple } from "../utils/useLensReducer";
 
 interface IProps<T> {
