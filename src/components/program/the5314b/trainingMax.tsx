@@ -35,6 +35,7 @@ export function TrainingMax(props: IProps): JSX.Element {
       </p>
       {exercises.map((e) => (
         <TrainingMaxExercise
+          key={e.id}
           name={e.name}
           tm={tms[e.id as typeof exerciseIds[number]]}
           program={props.program}

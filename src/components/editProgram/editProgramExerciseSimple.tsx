@@ -140,7 +140,7 @@ function Edit(props: IProps): JSX.Element {
                 min={1}
                 className={inputClassName}
                 placeholder="Sets"
-                value={sets.length}
+                defaultValue={sets.length}
                 onBlur={() => {
                   EditProgram.updateSimpleExercise(
                     props.dispatch,
@@ -166,7 +166,7 @@ function Edit(props: IProps): JSX.Element {
                 type="number"
                 className={inputClassName}
                 placeholder="Reps"
-                value={reps.success ? reps.data : ""}
+                defaultValue={reps.success ? reps.data : ""}
                 onBlur={() => {
                   EditProgram.updateSimpleExercise(
                     props.dispatch,
@@ -192,7 +192,7 @@ function Edit(props: IProps): JSX.Element {
                 ref={weightRef}
                 className={inputClassName}
                 placeholder="0"
-                value={weight.success ? weight.data.value : ""}
+                defaultValue={weight.success ? weight.data.value : ""}
                 onBlur={() => {
                   EditProgram.updateSimpleExercise(
                     props.dispatch,
@@ -258,8 +258,8 @@ function Errors(props: IErrorsProps): JSX.Element {
         possible to use Simple editing, the exercise:
       </p>
       <ul className="pl-4 mt-2 list-disc" data-cy="simple-errors">
-        {props.errors.map((e) => (
-          <li dangerouslySetInnerHTML={{ __html: e }} />
+        {props.errors.map((e, i) => (
+          <li key={i} dangerouslySetInnerHTML={{ __html: e }} />
         ))}
       </ul>
       <p className="mt-2">
@@ -321,7 +321,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={progressionIncrementRef}
             className={inputClassName}
             type="text"
-            value={progression.increment}
+            defaultValue={progression.increment}
             onBlur={() => {
               let value: number | undefined = parseFloat(progressionIncrementRef.current!.value);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(100, value));
@@ -352,7 +352,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={progressionAttemptsRef}
             className={inputClassName}
             type="number"
-            value={progression.attempts}
+            defaultValue={progression.attempts}
             onBlur={() => {
               let value: number | undefined = parseInt(progressionAttemptsRef.current!.value, 10);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(20, value));
@@ -382,7 +382,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={deloadDecrementsRef}
             className={inputClassName}
             type="text"
-            value={deload.decrement}
+            defaultValue={deload.decrement}
             onBlur={() => {
               let value: number | undefined = parseFloat(deloadDecrementsRef.current!.value);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(100, value));
@@ -413,7 +413,7 @@ function ProgressionView(props: IProgressionProps): JSX.Element {
             ref={deloadFailuresRef}
             className={inputClassName}
             type="number"
-            value={deload.attempts}
+            defaultValue={deload.attempts}
             onBlur={() => {
               let value: number | undefined = parseInt(deloadFailuresRef.current!.value, 10);
               value = isNaN(value) ? undefined : Math.max(0, Math.min(20, value));

@@ -5,7 +5,6 @@ import { StringUtils } from "../utils/string";
 import { availableMuscles, ICustomExercise, IEquipment, IExerciseId, IMuscle, ISettings } from "../types";
 import { GroupHeader } from "./groupHeader";
 import { SemiButton } from "./semiButton";
-import { forwardRef } from "react";
 import { Button } from "./button";
 import { IDispatch } from "../ducks/types";
 import { EditCustomExercise } from "../models/editCustomExercise";
@@ -73,110 +72,110 @@ interface IExercisesListProps {
   dispatch: IDispatch;
 }
 
-const ExercisesList = forwardRef(
-  (props: IExercisesListProps): JSX.Element => {
-    const { textInput, setFilter, filter } = props;
+const ExercisesList = (props: IExercisesListProps): JSX.Element => {
+  const { textInput, setFilter, filter } = props;
 
-    let exercises = Exercise.all({});
-    if (filter) {
-      exercises = exercises.filter((e) => StringUtils.fuzzySearch(filter, e.name.toLowerCase()));
-    }
-    const customExercises = props.settings.exercises;
+  let exercises = Exercise.all({});
+  if (filter) {
+    exercises = exercises.filter((e) => StringUtils.fuzzySearch(filter, e.name.toLowerCase()));
+  }
+  const customExercises = props.settings.exercises;
 
-    return (
-      <form data-cy="modal-exercise" onSubmit={(e) => e.preventDefault()}>
-        <input
-          ref={textInput}
-          className="block w-full px-4 py-2 mb-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
-          type="text"
-          placeholder="Filter"
-          onInput={() => {
-            setFilter(textInput.current!.value.toLowerCase());
-          }}
-        />
-        <GroupHeader name="Custom exercises" />
-        {ObjectUtils.keys(customExercises)
-          .filter((id) => !customExercises[id]?.isDeleted)
-          .map((id) => {
-            const e = customExercises[id]!;
-            return (
-              <section
-                data-cy={`menu-item-${StringUtils.dashcase(e.name)}`}
-                className="w-full px-2 py-1 text-left border-b border-gray-200"
-                onClick={(event) => {
-                  if (!HtmlUtils.classInParents(event.target as Element, "button")) {
-                    props.onChange(e.id);
-                  }
-                }}
-              >
-                <section className="flex items-center">
-                  <button
-                    className="px-3 py-4 button"
-                    data-cy={`custom-exercise-edit-${StringUtils.dashcase(e.name)}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      props.setEditingExercise(e);
-                      props.setIsCustomExerciseDisplayed(true);
-                    }}
-                  >
-                    <IconEdit size={21} lineColor="#0D2B3E" penColor="#A5B3BB" />
-                  </button>
-                  <div className="flex items-center flex-1 py-2 text-left">{e.name}</div>
-                  <button
-                    className="px-1 py-4 button"
-                    data-cy={`custom-exercise-delete-${StringUtils.dashcase(e.name)}`}
-                    onClick={(event) => {
-                      event.preventDefault();
-                      if (confirm(`Are you sure you want to delete ${e.name}?`)) {
-                        EditCustomExercise.markDeleted(props.dispatch, e.id);
-                      }
-                    }}
-                  >
-                    <IconDelete />
-                  </button>
-                </section>
-              </section>
-            );
-          })}
-        <SemiButton
-          data-cy="custom-exercise-create"
-          onClick={(event) => {
-            event.preventDefault();
-            props.setEditingExercise(undefined);
-            props.setIsCustomExerciseDisplayed(true);
-          }}
-        >
-          Add Custom Exercise +
-        </SemiButton>
-        <GroupHeader name="Built-in exercises" />
-        {exercises.map((e) => {
-          const equipment = Exercise.defaultEquipment(e.id, customExercises);
+  return (
+    <form data-cy="modal-exercise" onSubmit={(e) => e.preventDefault()}>
+      <input
+        ref={textInput}
+        className="block w-full px-4 py-2 mb-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
+        type="text"
+        placeholder="Filter"
+        onInput={() => {
+          setFilter(textInput.current!.value.toLowerCase());
+        }}
+      />
+      <GroupHeader name="Custom exercises" />
+      {ObjectUtils.keys(customExercises)
+        .filter((id) => !customExercises[id]?.isDeleted)
+        .map((id) => {
+          const e = customExercises[id]!;
           return (
             <section
+              key={id}
               data-cy={`menu-item-${StringUtils.dashcase(e.name)}`}
               className="w-full px-2 py-1 text-left border-b border-gray-200"
-              onClick={() => {
-                props.onChange(e.id);
+              onClick={(event) => {
+                if (!HtmlUtils.classInParents(event.target as Element, "button")) {
+                  props.onChange(e.id);
+                }
               }}
             >
               <section className="flex items-center">
-                <div className="w-12 pr-2">
-                  {equipment && (
-                    <img
-                      src={`https://www.liftosaur.com/externalimages/exercises/single/small/${e.id.toLowerCase()}_${equipment.toLowerCase()}_single_small.png`}
-                      alt={`${e.name} image`}
-                    />
-                  )}
-                </div>
+                <button
+                  className="px-3 py-4 button"
+                  data-cy={`custom-exercise-edit-${StringUtils.dashcase(e.name)}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    props.setEditingExercise(e);
+                    props.setIsCustomExerciseDisplayed(true);
+                  }}
+                >
+                  <IconEdit size={21} lineColor="#0D2B3E" penColor="#A5B3BB" />
+                </button>
                 <div className="flex items-center flex-1 py-2 text-left">{e.name}</div>
+                <button
+                  className="px-1 py-4 button"
+                  data-cy={`custom-exercise-delete-${StringUtils.dashcase(e.name)}`}
+                  onClick={(event) => {
+                    event.preventDefault();
+                    if (confirm(`Are you sure you want to delete ${e.name}?`)) {
+                      EditCustomExercise.markDeleted(props.dispatch, e.id);
+                    }
+                  }}
+                >
+                  <IconDelete />
+                </button>
               </section>
             </section>
           );
         })}
-      </form>
-    );
-  }
-);
+      <SemiButton
+        data-cy="custom-exercise-create"
+        onClick={(event) => {
+          event.preventDefault();
+          props.setEditingExercise(undefined);
+          props.setIsCustomExerciseDisplayed(true);
+        }}
+      >
+        Add Custom Exercise +
+      </SemiButton>
+      <GroupHeader name="Built-in exercises" />
+      {exercises.map((e) => {
+        const equipment = Exercise.defaultEquipment(e.id, customExercises);
+        return (
+          <section
+            key={e.id}
+            data-cy={`menu-item-${StringUtils.dashcase(e.name)}`}
+            className="w-full px-2 py-1 text-left border-b border-gray-200"
+            onClick={() => {
+              props.onChange(e.id);
+            }}
+          >
+            <section className="flex items-center">
+              <div className="w-12 pr-2">
+                {equipment && (
+                  <img
+                    src={`https://www.liftosaur.com/externalimages/exercises/single/small/${e.id.toLowerCase()}_${equipment.toLowerCase()}_single_small.png`}
+                    alt={`${e.name} image`}
+                  />
+                )}
+              </div>
+              <div className="flex items-center flex-1 py-2 text-left">{e.name}</div>
+            </section>
+          </section>
+        );
+      })}
+    </form>
+  );
+};
 
 interface IEditCustomExerciseProps {
   settings: ISettings;

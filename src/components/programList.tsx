@@ -44,6 +44,7 @@ export function ProgramListView(props: IProps): JSX.Element {
           <GroupHeader name="Your Programs" />
           {customPrograms.map((program) => (
             <MenuItem
+              key={program.id}
               name={program.name}
               onClick={(e) => {
                 if (!HtmlUtils.classInParents(e.target as Element, "button")) {
@@ -53,7 +54,7 @@ export function ProgramListView(props: IProps): JSX.Element {
               value={
                 <>
                   <button
-                    className="button p-2 align-middle"
+                    className="p-2 align-middle button"
                     onClick={() => {
                       if (props.editProgramId == null || props.editProgramId !== program.id) {
                         Program.editAction(props.dispatch, program.id);
@@ -65,7 +66,7 @@ export function ProgramListView(props: IProps): JSX.Element {
                     <IconEdit size={20} lineColor="#0D2B3E" penColor="#A5B3BB" />
                   </button>
                   <button
-                    className="button p-2 align-middle"
+                    className="p-2 align-middle button"
                     onClick={() => {
                       if (props.editProgramId == null || props.editProgramId !== program.id) {
                         if (confirm("Are you sure?")) {
@@ -98,6 +99,7 @@ export function ProgramListView(props: IProps): JSX.Element {
           <GroupHeader name="Programs to clone from" />
           {programs.map((program) => (
             <button
+              key={program.id}
               className="relative flex items-center w-full px-6 py-4 text-left border-b border-gray-200"
               onClick={() => props.onSelectProgram(program.id)}
             >
@@ -105,6 +107,7 @@ export function ProgramListView(props: IProps): JSX.Element {
               <div className="text-right" style={{ maxWidth: "30%", lineHeight: "1em" }}>
                 {program.tags.map((tag) => (
                   <span
+                    key={tag}
                     className={`inline-block mx-2 my-0 text-xs text-white whitespace-no-wrap rounded-full ${
                       tagToColor[tag] || "bg-red-700"
                     }`}

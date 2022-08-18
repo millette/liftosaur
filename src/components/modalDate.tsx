@@ -21,10 +21,10 @@ export function ModalDate(props: IModalDateProps): JSX.Element {
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           ref={textInput}
-          className="focus:outline-none focus:shadow-outline block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none"
+          className="block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
           type="date"
           placeholder="Date"
-          value={formattedDate}
+          defaultValue={formattedDate}
         />
         <div className="mt-4 text-right">
           <Button

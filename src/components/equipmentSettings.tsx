@@ -222,6 +222,7 @@ function EquipmentSettingsPlates<T>(props: IEquipmentSettingsPlatesProps<T>): JS
       {plates.map((plate) => {
         return (
           <MenuItemEditable
+            key={plate.weight.value}
             name={`${plate.weight.value} ${plate.weight.unit}`}
             type="number"
             value={plate.num.toString()}

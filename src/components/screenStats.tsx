@@ -301,7 +301,6 @@ const Input = memo(
   forwardRef(
     (props: IInputProps, ref: Ref<HTMLInputElement>): JSX.Element => {
       const name = StringUtils.dashcase(props.label.toLowerCase());
-      console.log("RENDER ", props.label, props.unit, props.value);
       return (
         <div className="inline-block w-full text-left">
           <label className="block text-sm italic">
@@ -311,7 +310,7 @@ const Input = memo(
             data-cy={`input-stats-${name}`}
             tabIndex={1}
             className="w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
-            value={props.value}
+            defaultValue={props.value}
             ref={ref}
             type="number"
             placeholder="e.g. 10"

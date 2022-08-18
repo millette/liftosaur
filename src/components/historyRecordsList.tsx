@@ -43,6 +43,7 @@ export function HistoryRecordsList(props: IHistoryRecordsListProps): JSX.Element
       {combinedHistory.map((historyRecord) =>
         historyRecord.user === "self" ? (
           <HistoryRecordView
+            key={historyRecord.record.id}
             settings={settings}
             historyRecord={historyRecord.record}
             userId={props.currentUserId}
@@ -52,6 +53,7 @@ export function HistoryRecordsList(props: IHistoryRecordsListProps): JSX.Element
           />
         ) : (
           <HistoryRecordView
+            key={historyRecord.record.id}
             comments={props.comments}
             settings={historyRecord.user.storage.settings}
             nickname={historyRecord.user.nickname || historyRecord.user.id}

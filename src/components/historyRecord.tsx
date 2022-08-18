@@ -59,8 +59,8 @@ export const HistoryRecordView = memo((props: IProps): JSX.Element => {
             {historyRecord.programName}, {historyRecord.dayName}
           </div>
         </div>
-        {entries.map((group) => (
-          <div className="flex flex-row" data-cy="history-entry">
+        {entries.map((group, index) => (
+          <div key={index} className="flex flex-row" data-cy="history-entry">
             {group.map((entry, i) => {
               let className: string;
               if (group.length === 1 || i !== group.length - 1) {
@@ -71,7 +71,7 @@ export const HistoryRecordView = memo((props: IProps): JSX.Element => {
               if (entry != null) {
                 const exercise = Exercise.get(entry.exercise, props.settings.exercises);
                 return (
-                  <div data-cy="history-entry-exercise" className={className}>
+                  <div data-cy="history-entry-exercise" className={className} key={i}>
                     <div data-cy="history-entry-exercise-name" style={{ flex: 2 }}>
                       {exercise.name}
                     </div>
@@ -87,7 +87,7 @@ export const HistoryRecordView = memo((props: IProps): JSX.Element => {
                   </div>
                 );
               } else {
-                return <div className={className}></div>;
+                return <div key={i} className={className}></div>;
               }
             })}
           </div>

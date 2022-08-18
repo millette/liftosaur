@@ -138,7 +138,7 @@ const ExerciseContentView = memo(
             {targetMuscles.length > 0 && (
               <button
                 style={{ marginBottom: "2px" }}
-                className="ls-show-exercise-image px-2 py-0 ml-2 align-middle"
+                className="px-2 py-0 ml-2 align-middle ls-show-exercise-image"
                 onClick={props.onInfoClick}
               >
                 <IconQuestion width={15} height={15} />
@@ -160,7 +160,7 @@ const ExerciseContentView = memo(
                 <button
                   style={{ marginBottom: "2px" }}
                   data-cy="edit-exercise"
-                  className="ls-edit-set px-2 py-0 align-middle"
+                  className="px-2 py-0 align-middle ls-edit-set"
                   onClick={() => setIsEditMode(true)}
                 >
                   <IconEdit size={15} lineColor="#0D2B3E" penColor="#A5B3BB" />
@@ -168,14 +168,14 @@ const ExerciseContentView = memo(
               ))}
           </div>
           <div className="text-right">
-            {warmupWeights.map((w) => {
+            {warmupWeights.map((w, i) => {
               const className =
                 nextSet != null &&
                 Weight.eq(Weight.roundConvertTo(nextSet.weight, props.settings, props.entry.exercise.equipment), w)
                   ? "font-bold"
                   : "";
               return (
-                <div className={className}>
+                <div className={className} key={i}>
                   <WeightView weight={w} exercise={props.entry.exercise} settings={props.settings} />
                   <span className="text-gray-500">
                     {w.value} {w.unit}
@@ -190,7 +190,7 @@ const ExerciseContentView = memo(
                   ? "font-bold"
                   : "";
               return (
-                <div className={className}>
+                <div className={className} key={i}>
                   <WeightView weight={w} exercise={props.entry.exercise} settings={props.settings} />
                   <button
                     data-help-id={props.showHelp && props.index === 0 && i === 0 ? "progress-change-weight" : undefined}
@@ -198,7 +198,7 @@ const ExerciseContentView = memo(
                     data-help-offset-x={-80}
                     data-help-width={140}
                     data-cy="change-weight"
-                    className="ls-progress-open-change-weight-modal text-blue-500 underline cursor-pointer"
+                    className="text-blue-500 underline cursor-pointer ls-progress-open-change-weight-modal"
                     style={{ fontWeight: "inherit" }}
                     onClick={() => {
                       if (!friend) {
@@ -223,7 +223,7 @@ const ExerciseContentView = memo(
             <>
               {warmupSets.map((set, i) => {
                 return (
-                  <div data-cy="warmup-set">
+                  <div data-cy="warmup-set" key={i}>
                     <div
                       data-cy="warmup-set-title"
                       className="text-xs text-gray-400"
@@ -255,7 +255,7 @@ const ExerciseContentView = memo(
                         <button
                           data-cy="set-edit-mode-remove"
                           style={{ top: "-0.5rem", left: "-0.5rem" }}
-                          className="ls-edit-set-remove absolute p-1"
+                          className="absolute p-1 ls-edit-set-remove"
                           onClick={() => {
                             EditProgressEntry.removeSet(props.dispatch, true, props.index, i);
                           }}
@@ -279,7 +279,7 @@ const ExerciseContentView = memo(
                   <button
                     data-cy="add-warmup-set"
                     onClick={() => props.onStartSetChanging!(true, props.index, undefined)}
-                    className="ls-edit-set-open-modal-add-warmup is-edit-mode w-12 h-12 my-2 mr-3 leading-7 text-center bg-gray-200 border border-gray-400 border-dashed rounded-lg"
+                    className="w-12 h-12 my-2 mr-3 leading-7 text-center bg-gray-200 border border-gray-400 border-dashed rounded-lg ls-edit-set-open-modal-add-warmup is-edit-mode"
                   >
                     +
                   </button>
@@ -290,7 +290,7 @@ const ExerciseContentView = memo(
           )}
           {props.entry.sets.map((set, i) => {
             return (
-              <div className={`relative ${isEditMode ? "is-edit-mode" : ""}`} data-cy="workout-set">
+              <div key={i} className={`relative ${isEditMode ? "is-edit-mode" : ""}`} data-cy="workout-set">
                 <ExerciseSetView
                   showHelp={props.showHelp && (warmupSets?.length || 0) === 0 && props.index === 0 && i === 0}
                   exercise={props.entry.exercise}
@@ -314,7 +314,7 @@ const ExerciseContentView = memo(
                   <button
                     data-cy="set-edit-mode-remove"
                     style={{ top: "-0.5rem", left: "-0.5rem" }}
-                    className="ls-edit-set-remove absolute p-1"
+                    className="absolute p-1 ls-edit-set-remove"
                     onClick={() => {
                       EditProgressEntry.removeSet(props.dispatch, false, props.index, i);
                     }}
@@ -329,7 +329,7 @@ const ExerciseContentView = memo(
             <button
               data-cy="add-set"
               onClick={() => props.onStartSetChanging!(false, props.index, undefined)}
-              className="ls-edit-set-open-modal-add is-edit-mode w-12 h-12 my-2 mr-3 leading-7 text-center bg-gray-200 border border-gray-400 border-dashed rounded-lg"
+              className="w-12 h-12 my-2 mr-3 leading-7 text-center bg-gray-200 border border-gray-400 border-dashed rounded-lg ls-edit-set-open-modal-add is-edit-mode"
             >
               +
             </button>
@@ -373,12 +373,12 @@ function HistoricalReps(props: { sets: ISet[] }): JSX.Element {
   return (
     <>
       {props.sets.map((set, i) => (
-        <>
+        <React.Fragment key={i}>
           {i !== 0 && <span className="text-gray-600">/</span>}
           <span className={(set.completedReps || 0) >= set.reps ? `text-green-600` : `text-red-600`}>
             {set.completedReps || 0}
           </span>
-        </>
+        </React.Fragment>
       ))}
     </>
   );

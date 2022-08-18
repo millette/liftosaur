@@ -46,6 +46,7 @@ export const CardsView = memo(
 
           return (
             <ExerciseView
+              key={index}
               history={props.history}
               showHelp={true}
               isCurrent={Progress.isCurrent(props.progress)}

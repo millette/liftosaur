@@ -26,7 +26,7 @@ export function DraggableList<T>(props: IDraggableListProps<T>): JSX.Element {
   return (
     <div ref={elWrapper}>
       {props.items.map((e, i) => (
-        <>
+        <React.Fragment key={i}>
           <DropTarget index={i} heights={heights.current} data={theData.current} />
           <DraggableListItem
             isDragging={!!theData.current}
@@ -68,7 +68,7 @@ export function DraggableList<T>(props: IDraggableListProps<T>): JSX.Element {
             }}
           />
           {props.items.length - 1 === i && <DropTarget heights={heights.current} index={i + 1} data={data} />}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

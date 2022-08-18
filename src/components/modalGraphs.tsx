@@ -82,6 +82,7 @@ export function ModalGraphs(props: IModalGraphsProps): JSX.Element {
         {exercises.map((e) => {
           return (
             <section
+              key={e.id}
               data-cy={`item-graph-${StringUtils.dashcase(e.name)}`}
               className="flex w-full px-2 py-1 text-left border-b border-gray-200"
               onClick={() => EditGraphs.addExerciseGraph(props.dispatch, e)}
@@ -94,6 +95,7 @@ export function ModalGraphs(props: IModalGraphsProps): JSX.Element {
         {statsWeightKeys.map((statsKey) => {
           return (
             <MenuItem
+              key={statsKey}
               name={Stats.name(statsKey)}
               onClick={() => EditGraphs.addStatsWeightGraph(props.dispatch, statsKey)}
             />
@@ -102,6 +104,7 @@ export function ModalGraphs(props: IModalGraphsProps): JSX.Element {
         {statsLengthKeys.map((statsKey) => {
           return (
             <MenuItem
+              key={statsKey}
               name={Stats.name(statsKey)}
               onClick={() => EditGraphs.addStatsLengthGraph(props.dispatch, statsKey)}
             />

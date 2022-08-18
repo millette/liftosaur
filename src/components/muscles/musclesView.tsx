@@ -76,7 +76,7 @@ export function MusclesView(props: IMusclesViewProps): JSX.Element {
                 color = "text-red-600";
               }
               return (
-                <div className="flex flex-1">
+                <div className="flex flex-1" key={muscleName}>
                   {muscleName && <div className="flex-1">{StringUtils.capitalize(muscleName)}</div>}
                   {value != null ? <div className={color}>{value.toFixed(0)}%</div> : undefined}
                 </div>
@@ -117,12 +117,12 @@ export function MusclesView(props: IMusclesViewProps): JSX.Element {
                 ]);
                 synergistScreenMusclesWithPercentage.sort((a, b) => b[1] - a[1]);
                 return (
-                  <div>
+                  <div key={e.id}>
                     <div className="text-green-700">{Exercise.get(e, props.settings.exercises).name}</div>
                     <div data-cy="target-muscles-list" className="pl-2">
                       <div className="text-gray-600">Target: </div>
                       {targetScreenMusclesWithPercentage.map(([m, val]) => (
-                        <div className="pl-2">
+                        <div className="pl-2" key={m}>
                           <span>{m}</span>: <span>{val.toFixed(1)}%</span>
                         </div>
                       ))}
@@ -130,7 +130,7 @@ export function MusclesView(props: IMusclesViewProps): JSX.Element {
                     <div data-cy="synergist-muscles-list" className="pl-2">
                       <span className="text-gray-600">Synergist: </span>
                       {synergistScreenMusclesWithPercentage.map(([m, val]) => (
-                        <div className="pl-2">
+                        <div className="pl-2" key={m}>
                           <span>{m}</span>: <span>{val.toFixed(1)}%</span>
                         </div>
                       ))}

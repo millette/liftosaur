@@ -68,13 +68,13 @@ export function EditProgramDay(props: IProps): JSX.Element {
                     value={
                       <>
                         <button
-                          className="ls-day-edit-exercise button p-2 align-middle"
+                          className="p-2 align-middle ls-day-edit-exercise button"
                           onClick={() => EditProgram.editProgramExercise(props.dispatch, exercise)}
                         >
                           <IconEdit size={20} lineColor="#0D2B3E" penColor="#A5B3BB" />
                         </button>
                         <button
-                          className="ls-day-toggle-exercise button p-2 align-middle"
+                          className="p-2 align-middle ls-day-toggle-exercise button"
                           onClick={() =>
                             EditProgram.toggleDayExercise(props.dispatch, program, props.dayIndex, exercise.id)
                           }
@@ -105,6 +105,7 @@ export function EditProgramDay(props: IProps): JSX.Element {
             <GroupHeader name="Available exercises" />
             {program.exercises.map((exercise) => (
               <MenuItem
+                key={exercise.id}
                 name={exercise.name}
                 onClick={() => {
                   EditProgram.toggleDayExercise(props.dispatch, program, props.dayIndex, exercise.id);
@@ -127,7 +128,7 @@ export function EditProgramDay(props: IProps): JSX.Element {
         buttons={
           <button
             data-cy="footer-muscles"
-            className="ls-footer-muscles p-4"
+            className="p-4 ls-footer-muscles"
             aria-label="Muscles"
             onClick={() => props.dispatch(Thunk.pushScreen("musclesDay"))}
           >

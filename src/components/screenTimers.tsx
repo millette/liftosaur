@@ -25,6 +25,7 @@ export function ScreenTimers(props: IProps): JSX.Element {
           const timer = props.timers[timerType];
           return (
             <MenuItemEditable
+              key={timerType}
               name={StringUtils.capitalize(timerType)}
               type="number"
               hasClear={true}

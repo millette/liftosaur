@@ -31,13 +31,20 @@ export function MenuItemEditable(props: IMenuItemEditableProps): JSX.Element {
     <MenuItemWrapper name={props.name}>
       <label className="flex flex-col flex-1">
         <div className="flex flex-1">
-          <span
-            data-cy={`menu-item-name-${StringUtils.dashcase(props.name)}`}
-            className="flex items-center flex-1 py-2"
-            {...(props.isNameHtml ? { dangerouslySetInnerHTML: { __html: props.name } } : {})}
-          >
-            {props.isNameHtml ? "" : props.name}
-          </span>
+          {props.isNameHtml ? (
+            <span
+              data-cy={`menu-item-name-${StringUtils.dashcase(props.name)}`}
+              className="flex items-center flex-1 py-2"
+              dangerouslySetInnerHTML={{ __html: props.name }}
+            />
+          ) : (
+            <span
+              data-cy={`menu-item-name-${StringUtils.dashcase(props.name)}`}
+              className="flex items-center flex-1 py-2"
+            >
+              {props.name}
+            </span>
+          )}
           <>
             <MenuItemValue
               name={props.name}
@@ -82,11 +89,11 @@ function MenuItemValue(
         data-cy={`menu-item-value-${StringUtils.dashcase(props.name)}`}
         className="flex-1 pr-2 text-gray-700"
         style={{ textAlignLast: "right" }}
-        value={props.value || undefined}
+        defaultValue={props.value || undefined}
         onChange={handleChange(props.onChange, props.setPatternError)}
       >
         {(props.values || []).map(([key, value]) => (
-          <option value={key} selected={key === props.value} style={{ direction: "rtl" }}>
+          <option key={key} value={key} style={{ direction: "rtl" }}>
             {value}
           </option>
         ))}
@@ -99,7 +106,7 @@ function MenuItemValue(
         key={props.value}
         type="text"
         className="flex-1 text-right text-gray-700"
-        value={props.value || undefined}
+        defaultValue={props.value || undefined}
         title={props.patternMessage}
         onBlur={handleChange(props.onChange, props.setPatternError)}
         pattern={props.pattern}
@@ -135,7 +142,7 @@ function MenuItemValue(
           type="number"
           title={props.patternMessage}
           className="items-center flex-1 w-0 min-w-0 p-2 text-right text-gray-700 outline-none"
-          value={props.value || undefined}
+          defaultValue={props.value || undefined}
           pattern={props.pattern}
         />
       </span>

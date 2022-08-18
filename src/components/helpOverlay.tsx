@@ -86,10 +86,10 @@ export function HelpOverlay(props: IProps): JSX.Element | null {
     <div className="absolute top-0 left-0 z-30 w-full h-full" id="help-overlay">
       <svg ref={svgEl} className="absolute top-0 left-0 w-full h-full" viewBox={`0 0 ${wt} ${ht}`}>
         <clipPath id="windows">
-          <path d={path} clip-rule="evenodd" />
+          <path d={path} clipRule="evenodd" />
         </clipPath>
         <rect
-          clip-path="url(#windows)"
+          clipPath="url(#windows)"
           x="0"
           y="0"
           width={width.current || 0}
@@ -101,6 +101,7 @@ export function HelpOverlay(props: IProps): JSX.Element | null {
         const rect = windows[key]!;
         return (
           <div
+            key={key}
             className="absolute text-sm italic text-white"
             style={{ top: rect.y + rect.h, left: rect.x + rect.text.offsetX, width: rect.text.width || "auto" }}
           >

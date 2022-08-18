@@ -24,11 +24,11 @@ export function ModalWhatsnew(props: IModalWhatsnewProps): JSX.Element {
         {sortedWhatsnewRecords.map(([dateStr, whatsNewRecord]) => {
           const date = DateUtils.format(DateUtils.fromYYYYMMDD(dateStr, ""), true);
           return (
-            <li className="pb-6">
+            <li className="pb-6" key={date}>
               <div className="text-xs font-bold text-gray-500">{date}</div>
               <div>
                 <h2 className="font-bold">{whatsNewRecord.title}</h2>
-                <p>{whatsNewRecord.body}</p>
+                <div>{whatsNewRecord.body}</div>
               </div>
             </li>
           );

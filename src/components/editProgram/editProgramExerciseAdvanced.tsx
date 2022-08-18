@@ -568,6 +568,7 @@ function EditWarmupSets(props: IEditWarmupSetsProps): JSX.Element {
       {(warmupSets || []).map((_, index) => {
         return (
           <EditWarmupSet
+            key={index}
             exercise={exercise}
             warmupSets={warmupSets || []}
             index={index}
@@ -635,7 +636,7 @@ function EditWarmupSet(props: IEditWarmupSetProps): JSX.Element {
           className={inputClassName.replace(" px-4 ", " px-2 ")}
           type="number"
           min="0"
-          value={warmupSet.reps}
+          defaultValue={warmupSet.reps}
           onBlur={onUpdate}
         />
       </div>
@@ -647,14 +648,19 @@ function EditWarmupSet(props: IEditWarmupSetProps): JSX.Element {
           className={inputClassName.replace(" px-4 ", " px-2 ")}
           type="number"
           min="0"
-          value={isPercent ? weightValue * 100 : weightValue}
+          defaultValue={isPercent ? weightValue * 100 : weightValue}
           onBlur={onUpdate}
         />
       </div>
       <div>
-        <select ref={valueUnitRef} onChange={onUpdate} data-cy="edit-warmup-set-value-unit">
+        <select
+          ref={valueUnitRef}
+          defaultValue={isPercent ? "%" : unit}
+          onChange={onUpdate}
+          data-cy="edit-warmup-set-value-unit"
+        >
           {["%", unit].map((u) => (
-            <option value={u} selected={isPercent ? u === "%" : u === unit}>
+            <option key={u} value={u}>
               {u}
             </option>
           ))}
@@ -670,7 +676,7 @@ function EditWarmupSet(props: IEditWarmupSetProps): JSX.Element {
           ref={thresholdRef}
           className={inputClassName.replace(" px-4 ", " px-2 ")}
           type="number"
-          value={threshold.value}
+          defaultValue={threshold.value}
         />
       </div>
       <div className="px-2">{threshold.unit}</div>
@@ -713,6 +719,7 @@ function EditState(props: IStateProps): JSX.Element {
 
         return (
           <MenuItemEditable
+            key={stateKey}
             name={stateKey}
             type="number"
             value={displayValue.toString()}

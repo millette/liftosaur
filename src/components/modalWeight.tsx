@@ -23,8 +23,8 @@ export function ModalWeight(props: IModalWeightProps): JSX.Element {
         <input
           ref={textInput}
           data-cy="modal-weight-input"
-          className="focus:outline-none focus:shadow-outline block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none"
-          value={Weight.is(props.weight) ? props.weight.value : props.weight}
+          className="block w-full px-4 py-2 leading-normal bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:shadow-outline"
+          defaultValue={Weight.is(props.weight) ? props.weight.value : props.weight}
           type="number"
           min="0"
           placeholder="Weight in lbs"

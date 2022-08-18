@@ -157,6 +157,7 @@ export function EditProgramDaysList(props: IProps): JSX.Element {
         {props.editProgram.exercises.map((exercise) => {
           return (
             <MenuItem
+              key={exercise.id}
               name={exercise.name}
               value={
                 <>

@@ -55,12 +55,13 @@ export function StatsList(props: IProps): JSX.Element {
         <select
           data-cy="stats-selector"
           className="w-full p-3"
+          defaultValue={selectedKey}
           onChange={(e) => {
             setSelectedKey(e.currentTarget.value as IStatsKey);
           }}
         >
           {statsKeys.map((key) => (
-            <option key={key} value={key} selected={key === selectedKey}>
+            <option key={key} value={key}>
               {Stats.name(key)}
             </option>
           ))}
@@ -117,7 +118,7 @@ export function StatsList(props: IProps): JSX.Element {
               </div>
               <div>
                 <button
-                  className="ls-delete-stat p-3"
+                  className="p-3 ls-delete-stat"
                   data-cy="delete-stat"
                   onClick={() => {
                     if (selectedKey === "weight") {
