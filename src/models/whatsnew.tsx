@@ -1052,7 +1052,7 @@ Bench Press / 3x8 / progress: custom() {~
       </ul>
     ),
   },
-  "20240422": {
+  "20240421": {
     title: <span>Added rich reps / weight / rpe inputs</span>,
     body: (
       <ul>
