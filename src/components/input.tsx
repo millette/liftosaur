@@ -116,7 +116,7 @@ export const Input = forwardRef(
                 {props.label}
               </div>
             )}
-            <div className="relative flex" style={{ top: props.label ? "2px" : "7px", left: "0" }}>
+            <div className="relative flex" style={{ top: props.label ? "3px" : "8px", left: "0" }}>
               {props.multiline ? (
                 <textarea
                   data-cy={`${identifier}-input`}
@@ -136,7 +136,7 @@ export const Input = forwardRef(
                   onInput={changeType === "oninput" ? onInputHandler : undefined}
                   onFocus={selectInputOnFocus}
                   className="flex-1 w-0 min-w-0 text-base border-none focus:outline-none"
-                  style={{ fontSize: size === "md" ? "16px" : "15px" }}
+                  style={{ height: "1.25rem", fontSize: size === "md" ? "16px" : "15px" }}
                   {...otherProps}
                 />
               )}
