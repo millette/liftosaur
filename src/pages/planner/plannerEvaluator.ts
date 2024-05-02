@@ -1,4 +1,4 @@
-import { IPlannerProgram, ISettings, IDayData } from "../../types";
+import { IPlannerProgram, ISettings, IDayData, IPlannerProgramDay } from "../../types";
 import { parser as plannerExerciseParser } from "./plannerExerciseParser";
 import {
   IPlannerEvalFullResult,
@@ -20,6 +20,8 @@ import { PP } from "../../models/pp";
 import { ScriptRunner } from "../../parser";
 import { Progress } from "../../models/progress";
 import { LiftoscriptSyntaxError } from "../../liftoscriptEvaluator";
+import { PlannerEvaluatedProgramToText } from "./plannerEvaluatedProgramToText";
+import { IEither } from "../../utils/types";
 
 export type IByExercise<T> = Record<string, T>;
 export type IByExerciseWeekDay<T> = Record<string, Record<number, Record<number, T>>>;
@@ -112,7 +114,19 @@ export class PlannerEvaluator {
     metadata.fullNames.add(exercise.fullName);
   }
 
-  private static getPerDayEvaluatedWeeks(
+  public static evaluateDay(day: IPlannerProgramDay, dayData: IDayData, settings: ISettings): IPlannerEvalResult {
+    const tree = plannerExerciseParser.parse(day.exerciseText);
+    const evaluator = new PlannerExerciseEvaluator(day.exerciseText, settings, "perday", dayData);
+    const result = evaluator.evaluate(tree.topNode);
+    if (result.success) {
+      const exercises = result.data[0]?.days[0]?.exercises || [];
+      return { success: true, data: exercises };
+    } else {
+      return result;
+    }
+  }
+
+  public static getPerDayEvaluatedWeeks(
     plannerProgram: IPlannerProgram,
     settings: ISettings
   ): {
@@ -130,16 +144,14 @@ export class PlannerEvaluator {
     };
     const evaluatedWeeks: IPlannerEvalResult[][] = plannerProgram.weeks.map((week, weekIndex) => {
       return week.days.map((day, dayInWeekIndex) => {
-        const tree = plannerExerciseParser.parse(day.exerciseText);
-        const evaluator = new PlannerExerciseEvaluator(day.exerciseText, settings, "perday", {
-          day: dayIndex + 1,
-          dayInWeek: dayInWeekIndex + 1,
-          week: weekIndex + 1,
-        });
-        const result = evaluator.evaluate(tree.topNode);
+        const result = this.evaluateDay(
+          day,
+          { week: weekIndex + 1, dayInWeek: dayInWeekIndex + 1, day: dayIndex + 1 },
+          settings
+        );
         dayIndex += 1;
         if (result.success) {
-          const exercises = result.data[0]?.days[0]?.exercises || [];
+          const exercises = result.data;
           for (const exercise of exercises) {
             try {
               this.fillInMetadata(exercise, metadata, weekIndex, dayIndex, dayInWeekIndex);
@@ -459,6 +471,34 @@ export class PlannerEvaluator {
         }
         update.reuse = originalUpdate;
       }
+    }
+  }
+
+  private static getFirstErrorFromEvaluatedWeeks(
+    evaluatedWeeks: IPlannerEvalResult[][]
+  ): PlannerSyntaxError | undefined {
+    for (const week of evaluatedWeeks) {
+      for (const day of week) {
+        if (!day.success) {
+          return day.error;
+        }
+      }
+    }
+    return undefined;
+  }
+
+  public static evaluatedProgramToText(
+    oldPlannerProgram: IPlannerProgram,
+    evaluatedWeeks: IPlannerEvalResult[][],
+    settings: ISettings
+  ): IEither<IPlannerProgram, PlannerSyntaxError> {
+    const result = new PlannerEvaluatedProgramToText(oldPlannerProgram, evaluatedWeeks, settings).run();
+    const { evaluatedWeeks: newEvaluatedWeeks } = this.evaluate(result, settings);
+    const error = this.getFirstErrorFromEvaluatedWeeks(newEvaluatedWeeks);
+    if (error) {
+      return { success: false, error: error };
+    } else {
+      return { success: true, data: result };
     }
   }
 
